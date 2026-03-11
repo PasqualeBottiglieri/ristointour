@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { restaurants } from "@/data/restaurants";
-import { detailPageEntries } from "@/data/types";
+import { getListingBySlug, getDetailPageSlugs } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RestaurantHero from "@/components/RestaurantHero";
@@ -19,13 +18,14 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return detailPageEntries(restaurants).map((r) => ({ slug: r.slug }));
+export async function generateStaticParams() {
+  const slugs = await getDetailPageSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const restaurant = restaurants.find((r) => r.slug === slug && r.hasDetailPage);
+  const restaurant = await getListingBySlug(slug);
   if (!restaurant) return { title: "Ristorante non trovato | Ristointour" };
 
   return {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function RestaurantPage({ params }: PageProps) {
   const { slug } = await params;
-  const restaurant = restaurants.find((r) => r.slug === slug && r.hasDetailPage);
+  const restaurant = await getListingBySlug(slug);
 
   if (!restaurant) notFound();
 
@@ -60,7 +60,7 @@ export default async function RestaurantPage({ params }: PageProps) {
           </aside>
         </div>
 
-        <RestaurantSimilar current={restaurant} />
+        <RestaurantSimilar currentSlug={restaurant.slug} category={restaurant.category} />
       </main>
       <Footer />
       <MobileBookingButton />

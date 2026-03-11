@@ -1,4 +1,5 @@
-import type { Artist } from "@/data/artists";
+import type { Artist, ArtistSocial } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
 const platformLabels: Record<string, string> = {
   instagram: "Instagram",
@@ -19,14 +20,15 @@ const platformIcons: Record<string, string> = {
 };
 
 export default function ArtistSocials({ artist }: { artist: Artist }) {
-  if (!artist.socials || artist.socials.length === 0) return null;
+  const socials = jsonArray<ArtistSocial>(artist.socialLinks);
+  if (socials.length === 0) return null;
 
   return (
     <section className="py-16 bg-stone-100">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-black mb-8">Segui {artist.name}</h2>
         <div className="flex flex-wrap justify-center gap-4 mb-10">
-          {artist.socials.map((social) => (
+          {socials.map((social) => (
             <a
               key={social.platform}
               href={social.url}

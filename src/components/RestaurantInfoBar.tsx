@@ -1,6 +1,6 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
-export default function RestaurantInfoBar({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantInfoBar({ restaurant }: { restaurant: Listing }) {
   return (
     <section className="bg-white p-6 rounded-2xl border border-primary/5 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6">
       <div className="flex items-center gap-3">

@@ -1,6 +1,6 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
-export default function RestaurantDescription({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantDescription({ restaurant }: { restaurant: Listing }) {
   if (!restaurant.philosophy) return null;
 
   return (

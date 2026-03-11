@@ -1,6 +1,6 @@
 "use client";
 
-import { artistGenres, artistLocations, artistEventTypes } from "@/data/artists";
+import { artistGenres, artistLocations, artistEventTypes } from "@/data/content";
 
 interface ArtistFilterBarProps {
   genre: string;

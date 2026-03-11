@@ -1,10 +1,8 @@
-import { artists } from "@/data/artists";
-import { filterByPlan } from "@/data/types";
+import { getBasicHomepageArtists } from "@/lib/queries";
 import ArtistCardBasic from "./ArtistCardBasic";
 
-export default function BasicArtistsSection() {
-  const basicArtists = filterByPlan(artists, "basic")
-    .sort((a, b) => a.displayPriority - b.displayPriority);
+export default async function BasicArtistsSection() {
+  const basicArtists = await getBasicHomepageArtists();
 
   if (basicArtists.length === 0) return null;
 

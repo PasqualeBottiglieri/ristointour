@@ -1,6 +1,6 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
-export default function RestaurantBooking({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantBooking({ restaurant }: { restaurant: Listing }) {
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl shadow-stone-200/50 border border-stone-100 sticky top-24">
       <h3 className="font-serif text-2xl mb-6">Prenota un tavolo</h3>
@@ -47,20 +47,24 @@ export default function RestaurantBooking({ restaurant }: { restaurant: Restaura
       </form>
 
       <div className="mt-10 pt-8 border-t border-stone-100 space-y-6">
-        {restaurant.contact && (
+        {(restaurant.email || restaurant.website) && (
         <div className="space-y-4">
+          {restaurant.email && (
           <div className="flex items-center gap-3 text-stone-600">
             <span className="material-symbols-outlined text-primary">mail</span>
-            <span className="text-sm font-medium">{restaurant.contact.email}</span>
+            <span className="text-sm font-medium">{restaurant.email}</span>
           </div>
+          )}
+          {restaurant.website && (
           <div className="flex items-center gap-3 text-stone-600">
             <span className="material-symbols-outlined text-primary">
               language
             </span>
             <span className="text-sm font-medium">
-              {restaurant.contact.website}
+              {restaurant.website}
             </span>
           </div>
+          )}
         </div>
         )}
         {restaurant.mapImage && (

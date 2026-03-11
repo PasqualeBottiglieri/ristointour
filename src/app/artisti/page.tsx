@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistGrid from "@/components/ArtistGrid";
+import { getPublishedArtists } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Artisti & Musica per Eventi | Ristointour",
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
     "Scopri i migliori artisti e musicisti per il tuo evento nella Piana del Sele. Jazz, musica napoletana, DJ set e molto altro.",
 };
 
-export default function ArtistiPage() {
+export default async function ArtistiPage() {
+  const artists = await getPublishedArtists();
+
   return (
     <>
       <Header />
@@ -24,7 +27,7 @@ export default function ArtistiPage() {
               Dai matrimoni alle feste aziendali, dalla musica classica al DJ set.
             </p>
           </div>
-          <ArtistGrid />
+          <ArtistGrid artists={artists} />
         </div>
       </section>
       <Footer />

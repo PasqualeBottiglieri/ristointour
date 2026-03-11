@@ -1,6 +1,6 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
-export default function RestaurantHero({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantHero({ restaurant }: { restaurant: Listing }) {
   return (
     <section className="relative h-[60vh] min-h-[450px] rounded-2xl overflow-hidden group">
       <div

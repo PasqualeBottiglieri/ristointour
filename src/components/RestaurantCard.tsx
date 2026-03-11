@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
-export default function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantCard({ restaurant }: { restaurant: Listing }) {
   return (
     <Link
       href={`/ristoranti/${restaurant.slug}`}

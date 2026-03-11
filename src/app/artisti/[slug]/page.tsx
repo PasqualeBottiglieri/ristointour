@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { artists } from "@/data/artists";
-import { detailPageEntries } from "@/data/types";
+import { getArtistBySlug, getArtistDetailSlugs } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistHero from "@/components/ArtistHero";
@@ -14,13 +13,14 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return detailPageEntries(artists).map((artist) => ({ slug: artist.slug }));
+export async function generateStaticParams() {
+  const slugs = await getArtistDetailSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const artist = artists.find((a) => a.slug === slug && a.hasDetailPage);
+  const artist = await getArtistBySlug(slug);
   if (!artist) return { title: "Artista non trovato | Ristointour" };
 
   return {
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtistPage({ params }: PageProps) {
   const { slug } = await params;
-  const artist = artists.find((a) => a.slug === slug && a.hasDetailPage);
+  const artist = await getArtistBySlug(slug);
 
   if (!artist) notFound();
 

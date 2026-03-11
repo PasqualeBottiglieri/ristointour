@@ -1,13 +1,15 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing, GalleryImage } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
-export default function RestaurantGallery({ restaurant }: { restaurant: Restaurant }) {
-  if (!restaurant.galleryImages || restaurant.galleryImages.length === 0) return null;
+export default function RestaurantGallery({ restaurant }: { restaurant: Listing }) {
+  const images = jsonArray<GalleryImage>(restaurant.galleryImages);
+  if (images.length === 0) return null;
 
   return (
     <section>
       <h3 className="font-serif text-3xl mb-6">Galleria</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {restaurant.galleryImages.map((img, i) => {
+        {images.map((img, i) => {
           if (img.layout === "wide") {
             return (
               <div

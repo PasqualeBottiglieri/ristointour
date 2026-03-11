@@ -1,11 +1,8 @@
-import { restaurants } from "@/data/restaurants";
-import { filterByPlan } from "@/data/types";
+import { getBasicHomepageListings } from "@/lib/queries";
 import BusinessCardBasic from "./BusinessCardBasic";
 
-export default function BasicBusinessesSection() {
-  const basicBusinesses = filterByPlan(restaurants, "basic")
-    .filter((r) => r.showOnHomepage)
-    .sort((a, b) => a.displayPriority - b.displayPriority);
+export default async function BasicBusinessesSection() {
+  const basicBusinesses = await getBasicHomepageListings();
 
   if (basicBusinesses.length === 0) return null;
 

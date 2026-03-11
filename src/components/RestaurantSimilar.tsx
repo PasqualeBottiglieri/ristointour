@@ -1,8 +1,14 @@
 import Link from "next/link";
-import { restaurants, type Restaurant } from "@/data/restaurants";
+import { getSimilarListings } from "@/lib/queries";
 
-export default function RestaurantSimilar({ current }: { current: Restaurant }) {
-  const similar = restaurants.filter((r) => r.slug !== current.slug && r.hasDetailPage);
+export default async function RestaurantSimilar({
+  currentSlug,
+  category,
+}: {
+  currentSlug: string;
+  category: string;
+}) {
+  const similar = await getSimilarListings(currentSlug, category);
 
   if (similar.length === 0) return null;
 
@@ -30,12 +36,12 @@ export default function RestaurantSimilar({ current }: { current: Restaurant }) 
               <div className="flex items-center justify-between">
                 <h4 className="font-bold">{r.name}</h4>
                 {r.rating != null && (
-                <span className="flex items-center gap-1 text-primary text-sm font-bold">
-                  <span className="material-symbols-outlined fill-icon text-xs">
-                    star
-                  </span>{" "}
-                  {r.rating}
-                </span>
+                  <span className="flex items-center gap-1 text-primary text-sm font-bold">
+                    <span className="material-symbols-outlined fill-icon text-xs">
+                      star
+                    </span>{" "}
+                    {r.rating}
+                  </span>
                 )}
               </div>
               <p className="text-xs text-stone-500 uppercase tracking-widest font-semibold">

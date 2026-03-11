@@ -1,7 +1,9 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing, Review } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
-export default function RestaurantReviews({ restaurant }: { restaurant: Restaurant }) {
-  if (!restaurant.reviews || restaurant.reviews.length === 0) return null;
+export default function RestaurantReviews({ restaurant }: { restaurant: Listing }) {
+  const reviews = jsonArray<Review>(restaurant.reviews);
+  if (reviews.length === 0) return null;
 
   return (
     <section>
@@ -12,7 +14,7 @@ export default function RestaurantReviews({ restaurant }: { restaurant: Restaura
         </button>
       </div>
       <div className="space-y-6">
-        {restaurant.reviews.map((review) => (
+        {reviews.map((review) => (
           <div
             key={review.name}
             className="p-6 rounded-2xl bg-white border border-stone-100 shadow-sm space-y-4"

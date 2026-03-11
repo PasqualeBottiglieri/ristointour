@@ -1,4 +1,4 @@
-import type { PlanType } from "@/data/types";
+type PlanType = "basic" | "premium" | "sponsor";
 
 const planStyles: Record<PlanType, string> = {
   premium: "bg-emerald-900 text-white",

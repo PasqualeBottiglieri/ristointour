@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { artists } from "@/data/artists";
+import type { Artist } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 import ArtistCard from "./ArtistCard";
 import ArtistCardBasic from "./ArtistCardBasic";
 import ArtistFilterBar from "./ArtistFilterBar";
 
-export default function ArtistGrid() {
+export default function ArtistGrid({ artists }: { artists: Artist[] }) {
   const [genre, setGenre] = useState("");
   const [location, setLocation] = useState("");
   const [eventType, setEventType] = useState("");
@@ -15,10 +16,13 @@ export default function ArtistGrid() {
     return artists.filter((a) => {
       if (genre && a.genre !== genre) return false;
       if (location && a.location !== location) return false;
-      if (eventType && !a.eventTypes.includes(eventType)) return false;
+      if (eventType) {
+        const types = jsonArray<string>(a.eventTypes);
+        if (!types.includes(eventType)) return false;
+      }
       return true;
     });
-  }, [genre, location, eventType]);
+  }, [artists, genre, location, eventType]);
 
   const premiumArtists = filtered.filter((a) => a.hasDetailPage);
   const basicArtists = filtered.filter((a) => !a.hasDetailPage);

@@ -1,12 +1,8 @@
-import { artists } from "@/data/artists";
-import { filterByPlan } from "@/data/types";
+import { getFeaturedArtists } from "@/lib/queries";
 import ArtistCard from "./ArtistCard";
 
-export default function FeaturedArtists() {
-  const featured = filterByPlan(artists, "premium")
-    .filter((a) => a.featured && a.showOnHomepage)
-    .sort((a, b) => a.displayPriority - b.displayPriority)
-    .slice(0, 4);
+export default async function FeaturedArtists() {
+  const featured = await getFeaturedArtists();
 
   return (
     <section className="py-20 bg-stone-100">

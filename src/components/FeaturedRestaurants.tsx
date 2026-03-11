@@ -1,11 +1,8 @@
 import Link from "next/link";
-import { restaurants } from "@/data/restaurants";
-import { filterByPlan } from "@/data/types";
+import { getFeaturedListings } from "@/lib/queries";
 
-export default function FeaturedRestaurants() {
-  const premiumRestaurants = filterByPlan(restaurants, "premium")
-    .filter((r) => r.showOnHomepage)
-    .sort((a, b) => a.displayPriority - b.displayPriority);
+export default async function FeaturedRestaurants() {
+  const premiumRestaurants = await getFeaturedListings();
 
   return (
     <section className="py-20 bg-stone-100">

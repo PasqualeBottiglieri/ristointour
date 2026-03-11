@@ -1,6 +1,8 @@
-import type { Artist } from "@/data/artists";
+import type { Artist } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
 export default function ArtistBio({ artist }: { artist: Artist }) {
+  const eventTypes = jsonArray<string>(artist.eventTypes);
   if (!artist.biography && !artist.musicStyle) return null;
 
   return (
@@ -29,7 +31,7 @@ export default function ArtistBio({ artist }: { artist: Artist }) {
                 Ideale per
               </h3>
               <div className="flex flex-wrap gap-2">
-                {artist.eventTypes.map((type) => (
+                {eventTypes.map((type) => (
                   <span
                     key={type}
                     className="px-3 py-1 bg-stone-100 rounded-full text-sm font-bold font-display"

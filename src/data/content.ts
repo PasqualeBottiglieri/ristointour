@@ -126,3 +126,32 @@ export const locationOptions = [
   "Battipaglia",
   "Salerno",
 ];
+
+// ── Artist filter options ──────────────────────────────────────────
+
+export const artistGenres = [
+  "Jazz & Soul",
+  "Musica Napoletana",
+  "Pop & Rock",
+  "DJ Set",
+  "Musica Classica",
+  "Folk & Tradizionale",
+];
+
+export const artistLocations = [
+  "Paestum",
+  "Eboli",
+  "Battipaglia",
+  "Salerno",
+  "Capaccio",
+  "Agropoli",
+];
+
+export const artistEventTypes = [
+  "Matrimoni",
+  "Cene Private",
+  "Feste Aziendali",
+  "Aperitivi",
+  "Eventi all'Aperto",
+  "Sagre & Festival",
+];

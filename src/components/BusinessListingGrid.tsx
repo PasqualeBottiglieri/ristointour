@@ -1,21 +1,19 @@
-import { restaurants, type RestaurantCategory } from "@/data/restaurants";
+import { getPublishedListings } from "@/lib/queries";
 import RestaurantCard from "./RestaurantCard";
 import BusinessCardBasic from "./BusinessCardBasic";
 
 interface BusinessListingGridProps {
-  categories: RestaurantCategory[];
+  categories: string[];
   emptyIcon?: string;
   emptyLabel?: string;
 }
 
-export default function BusinessListingGrid({
+export default async function BusinessListingGrid({
   categories,
   emptyIcon = "store",
   emptyLabel = "Nessuna attività trovata",
 }: BusinessListingGridProps) {
-  const filtered = restaurants
-    .filter((r) => categories.includes(r.category))
-    .sort((a, b) => a.displayPriority - b.displayPriority);
+  const filtered = await getPublishedListings(categories);
 
   const premium = filtered.filter((r) => r.hasDetailPage);
   const basic = filtered.filter((r) => !r.hasDetailPage);

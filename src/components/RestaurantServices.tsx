@@ -1,7 +1,10 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing, Service, Hours } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
-export default function RestaurantServices({ restaurant }: { restaurant: Restaurant }) {
-  if (!restaurant.services && !restaurant.hours) return null;
+export default function RestaurantServices({ restaurant }: { restaurant: Listing }) {
+  const services = jsonArray<Service>(restaurant.services);
+  const hours = jsonArray<Hours>(restaurant.hours);
+  if (services.length === 0 && hours.length === 0) return null;
 
   return (
     <section className="border-t border-stone-100 pt-8">
@@ -18,7 +21,7 @@ export default function RestaurantServices({ restaurant }: { restaurant: Restaur
       </div>
       <div className="grid grid-cols-2 gap-8 text-sm">
         <ul className="space-y-4">
-          {(restaurant.services ?? []).map((service) => (
+          {services.map((service) => (
             <li
               key={service.label}
               className="flex items-center gap-3 text-emerald-900 font-medium"
@@ -31,7 +34,7 @@ export default function RestaurantServices({ restaurant }: { restaurant: Restaur
           ))}
         </ul>
         <ul className="space-y-4">
-          {(restaurant.hours ?? []).map((h) => (
+          {hours.map((h) => (
             <li key={h.day} className="flex items-center justify-between">
               <span className="text-stone-500">{h.day}</span>
               <span className="font-medium">{h.time}</span>

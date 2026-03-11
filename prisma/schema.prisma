@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Listing {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  category        String   // ristorante, pizzeria, agriturismo, caseificio, cantina, pasticceria, altro
+  planType        String   @default("basic") // basic, premium, sponsor
+  location        String
+  description     String   // short description
+  cuisine         String?
+  phone           String?
+  website         String?
+  email           String?
+  bookingLink     String?
+  menuLink        String?
+  socialLinks     Json?    // [{ platform, url }]
+
+  image           String
+  heroImage       String?
+  galleryImages   Json?    // [{ src, alt, layout }]
+  mapImage        String?
+
+  badge           String?
+  badgeStyle      String?
+  rating          Float?
+  reviewCount     Int?
+  priceRange      String?
+  priceLabel      String?
+  openTime        String?
+  philosophy      String?  // full description / about
+
+  dishes          Json?    // [{ icon, name, description }]
+  services        Json?    // [{ icon, label }]
+  hours           Json?    // [{ day, time }]
+  reviews         Json?    // [{ name, avatar, date, rating, text }]
+
+  showOnHomepage  Boolean  @default(false)
+  hasDetailPage   Boolean  @default(false)
+  displayPriority Int      @default(100)
+  featured        Boolean  @default(false)
+  status          String   @default("published") // draft, published
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([planType])
+  @@index([status])
+  @@index([showOnHomepage])
+  @@index([displayPriority])
+}
+
+model Artist {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  artistType       String   // cantante, band, dj, musicista, performer
+  genre            String
+  location         String
+  shortDescription String
+  biography        String?
+  musicStyle       String?
+
+  image            String
+  galleryImages    Json?    // [{ src, alt }]
+  videoEmbeds      Json?    // [{ url, title }]
+
+  phone            String?
+  website          String?
+  socialLinks      Json?    // [{ platform, url, label }]
+  eventTypes       Json?    // ["Matrimoni", "Feste", ...]
+
+  badge            String?
+  badgeStyle       String?
+
+  planType         String   @default("basic")
+  showOnHomepage   Boolean  @default(false)
+  hasDetailPage    Boolean  @default(false)
+  displayPriority  Int      @default(100)
+  featured         Boolean  @default(false)
+  status           String   @default("published")
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([artistType])
+  @@index([genre])
+  @@index([planType])
+  @@index([status])
+  @@index([showOnHomepage])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("admin") // admin, editor
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

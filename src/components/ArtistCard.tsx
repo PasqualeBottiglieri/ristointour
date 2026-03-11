@@ -1,7 +1,10 @@
 import Link from "next/link";
-import type { Artist } from "@/data/artists";
+import type { Artist } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
 export default function ArtistCard({ artist }: { artist: Artist }) {
+  const eventTypes = jsonArray<string>(artist.eventTypes);
+
   return (
     <Link
       href={`/artisti/${artist.slug}`}
@@ -31,7 +34,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
         </div>
         <h3 className="text-xl font-bold mb-1">{artist.name}</h3>
         <p className="text-stone-500 text-sm mb-6 italic font-display">
-          {artist.genre} &middot; {artist.eventTypes[0]}
+          {artist.genre} &middot; {eventTypes[0]}
         </p>
         <span className="block w-full py-3 bg-emerald-900 text-white text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-emerald-950 transition-colors font-display text-center">
           Scopri artista

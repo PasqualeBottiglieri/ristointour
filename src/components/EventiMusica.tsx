@@ -1,4 +1,4 @@
-import { artists } from "@/data/artists";
+import { getArtistsByLocation } from "@/lib/queries";
 import ArtistCard from "./ArtistCard";
 
 interface EventiMusicaProps {
@@ -6,10 +6,8 @@ interface EventiMusicaProps {
   maxArtists?: number;
 }
 
-export default function EventiMusica({ location, maxArtists = 3 }: EventiMusicaProps) {
-  const localArtists = artists
-    .filter((a) => a.location === location)
-    .slice(0, maxArtists);
+export default async function EventiMusica({ location, maxArtists = 3 }: EventiMusicaProps) {
+  const localArtists = await getArtistsByLocation(location, maxArtists);
 
   if (localArtists.length === 0) return null;
 

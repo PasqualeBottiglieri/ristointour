@@ -1,9 +1,9 @@
-import type { Restaurant } from "@/data/restaurants";
+import type { Listing } from "@/lib/types";
 
 export default function BusinessCardBasic({
   business,
 }: {
-  business: Restaurant;
+  business: Listing;
 }) {
   return (
     <div className="flex items-center gap-4 bg-white rounded-lg p-4 border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all duration-300">

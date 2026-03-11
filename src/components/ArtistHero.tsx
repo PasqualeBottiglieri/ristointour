@@ -1,6 +1,9 @@
-import type { Artist } from "@/data/artists";
+import type { Artist } from "@/lib/types";
+import { jsonArray } from "@/lib/types";
 
 export default function ArtistHero({ artist }: { artist: Artist }) {
+  const eventTypes = jsonArray<string>(artist.eventTypes);
+
   return (
     <section className="relative h-[50vh] min-h-[400px] flex items-end">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -32,7 +35,7 @@ export default function ArtistHero({ artist }: { artist: Artist }) {
           </span>
           <span className="flex items-center gap-1">
             <span className="material-symbols-outlined text-sm">celebration</span>
-            {artist.eventTypes.join(", ")}
+            {eventTypes.join(", ")}
           </span>
         </div>
       </div>
