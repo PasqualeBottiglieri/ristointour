@@ -1,6 +1,14 @@
 "use client";
 
 import type { Listing } from "@/generated/prisma/client";
+import ImageUpload from "./ImageUpload";
+import GalleryUpload from "./GalleryUpload";
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  layout?: string;
+}
 
 interface ListingFormProps {
   listing?: Listing;
@@ -80,6 +88,18 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
+            Indirizzo
+          </label>
+          <input
+            name="address"
+            defaultValue={listing?.address || ""}
+            className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+            placeholder="Via Roma 15, 84047 Paestum (SA)"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
             Descrizione Breve *
           </label>
           <input
@@ -143,27 +163,15 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-              Link Prenotazione
-            </label>
-            <input
-              name="bookingLink"
-              defaultValue={listing?.bookingLink || ""}
-              className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-              Link Menu
-            </label>
-            <input
-              name="menuLink"
-              defaultValue={listing?.menuLink || ""}
-              className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-            />
-          </div>
+        <div>
+          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
+            Link Menu
+          </label>
+          <input
+            name="menuLink"
+            defaultValue={listing?.menuLink || ""}
+            className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+          />
         </div>
       </fieldset>
 
@@ -174,53 +182,30 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
         </legend>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-              Immagine Card *
-            </label>
-            <input
-              name="image"
-              required
-              defaultValue={listing?.image}
-              className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-              placeholder="URL immagine"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-              Immagine Hero (Premium)
-            </label>
-            <input
-              name="heroImage"
-              defaultValue={listing?.heroImage || ""}
-              className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-            Immagine Mappa
-          </label>
-          <input
-            name="mapImage"
-            defaultValue={listing?.mapImage || ""}
-            className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+          <ImageUpload
+            name="image"
+            label="Immagine Card"
+            required
+            defaultValue={listing?.image}
+          />
+          <ImageUpload
+            name="heroImage"
+            label="Immagine Hero (Premium)"
+            defaultValue={listing?.heroImage || ""}
           />
         </div>
 
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-            Galleria Immagini (JSON)
-          </label>
-          <textarea
-            name="galleryImages"
-            rows={3}
-            defaultValue={listing?.galleryImages ? JSON.stringify(listing.galleryImages, null, 2) : ""}
-            className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-xs font-mono focus:ring-2 focus:ring-primary focus:border-primary"
-            placeholder='[{"src": "url", "alt": "desc", "layout": "square"}]'
-          />
-        </div>
+        <ImageUpload
+          name="mapImage"
+          label="Immagine Mappa"
+          defaultValue={listing?.mapImage || ""}
+        />
+
+        <GalleryUpload
+          name="galleryImages"
+          showLayout
+          defaultValue={listing?.galleryImages as GalleryImage[] | undefined}
+        />
       </fieldset>
 
       {/* Premium Details */}

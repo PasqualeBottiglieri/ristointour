@@ -11,7 +11,7 @@ export default function RestaurantInfoBar({ restaurant }: { restaurant: Listing 
           <p className="text-xs font-bold text-stone-500 uppercase tracking-widest">
             Posizione
           </p>
-          <p className="font-semibold">{restaurant.location}</p>
+          <p className="font-semibold">{restaurant.address || restaurant.location}</p>
         </div>
       </div>
       <div className="flex items-center gap-3">

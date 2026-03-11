@@ -36,9 +36,23 @@ export default function RestaurantHero({ restaurant }: { restaurant: Listing }) 
             </div>
           </div>
         </div>
-        <button className="bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/40 whitespace-nowrap">
-          Prenota Ora
-        </button>
+        {restaurant.phone ? (
+          <a
+            href={`tel:${restaurant.phone}`}
+            className="bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/40 whitespace-nowrap inline-flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined">call</span>
+            Chiama Ora
+          </a>
+        ) : restaurant.email ? (
+          <a
+            href={`mailto:${restaurant.email}`}
+            className="bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/40 whitespace-nowrap inline-flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined">mail</span>
+            Contatta Ora
+          </a>
+        ) : null}
       </div>
     </section>
   );

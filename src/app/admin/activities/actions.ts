@@ -26,14 +26,17 @@ function parseJson(value: string | null): Prisma.InputJsonValue | typeof Prisma.
 export async function createListing(formData: FormData) {
   const name = formData.get("name") as string;
   const slug = slugify(name);
+  const planType = formData.get("planType") as string;
+  const hasDetailPage = planType !== "basic" || formData.get("hasDetailPage") === "on";
 
   await prisma.listing.create({
     data: {
       slug,
       name,
       category: formData.get("category") as string,
-      planType: formData.get("planType") as string,
+      planType,
       location: formData.get("location") as string,
+      address: (formData.get("address") as string) || null,
       description: formData.get("description") as string,
       cuisine: (formData.get("cuisine") as string) || null,
       phone: (formData.get("phone") as string) || null,
@@ -59,7 +62,7 @@ export async function createListing(formData: FormData) {
       reviews: parseJson(formData.get("reviews") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
       showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage: formData.get("hasDetailPage") === "on",
+      hasDetailPage,
       featured: formData.get("featured") === "on",
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
@@ -68,17 +71,22 @@ export async function createListing(formData: FormData) {
 
   revalidatePath("/");
   revalidatePath("/admin/activities");
+  revalidatePath(`/ristoranti/${slug}`);
   redirect("/admin/activities");
 }
 
 export async function updateListing(id: string, formData: FormData) {
+  const planType = formData.get("planType") as string;
+  const hasDetailPage = planType !== "basic" || formData.get("hasDetailPage") === "on";
+
   await prisma.listing.update({
     where: { id },
     data: {
       name: formData.get("name") as string,
       category: formData.get("category") as string,
-      planType: formData.get("planType") as string,
+      planType,
       location: formData.get("location") as string,
+      address: (formData.get("address") as string) || null,
       description: formData.get("description") as string,
       cuisine: (formData.get("cuisine") as string) || null,
       phone: (formData.get("phone") as string) || null,
@@ -104,7 +112,7 @@ export async function updateListing(id: string, formData: FormData) {
       reviews: parseJson(formData.get("reviews") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
       showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage: formData.get("hasDetailPage") === "on",
+      hasDetailPage,
       featured: formData.get("featured") === "on",
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,

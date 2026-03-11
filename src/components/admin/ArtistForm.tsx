@@ -1,6 +1,13 @@
 "use client";
 
 import type { Artist } from "@/generated/prisma/client";
+import ImageUpload from "./ImageUpload";
+import GalleryUpload from "./GalleryUpload";
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
 
 interface ArtistFormProps {
   artist?: Artist;
@@ -77,14 +84,16 @@ export default function ArtistForm({ artist, action }: ArtistFormProps) {
 
       <fieldset className="bg-white rounded-xl border border-stone-200 p-6 space-y-4">
         <legend className="text-sm font-bold uppercase tracking-widest text-stone-500 px-2">Media</legend>
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Immagine *</label>
-          <input name="image" required defaultValue={artist?.image} className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary" />
-        </div>
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Galleria (JSON)</label>
-          <textarea name="galleryImages" rows={3} defaultValue={artist?.galleryImages ? JSON.stringify(artist.galleryImages, null, 2) : ""} className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-xs font-mono focus:ring-2 focus:ring-primary focus:border-primary" placeholder='[{"src": "url", "alt": "desc"}]' />
-        </div>
+        <ImageUpload
+          name="image"
+          label="Immagine"
+          required
+          defaultValue={artist?.image}
+        />
+        <GalleryUpload
+          name="galleryImages"
+          defaultValue={artist?.galleryImages as GalleryImage[] | undefined}
+        />
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Video Embed (JSON)</label>
           <textarea name="videoEmbeds" rows={3} defaultValue={artist?.videoEmbeds ? JSON.stringify(artist.videoEmbeds, null, 2) : ""} className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-xs font-mono focus:ring-2 focus:ring-primary focus:border-primary" placeholder='[{"url": "youtube-embed-url", "title": "..."}]' />

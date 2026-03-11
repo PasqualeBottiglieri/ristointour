@@ -63,7 +63,7 @@ export default async function RestaurantPage({ params }: PageProps) {
         <RestaurantSimilar currentSlug={restaurant.slug} category={restaurant.category} />
       </main>
       <Footer />
-      <MobileBookingButton />
+      <MobileBookingButton restaurant={restaurant} />
     </>
   );
 }
