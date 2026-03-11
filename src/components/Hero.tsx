@@ -19,18 +19,16 @@ export default function Hero() {
         </p>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-full p-2 shadow-2xl flex flex-col md:flex-row items-center max-w-3xl mx-auto">
-          <div className="flex-1 px-6 py-2 text-left border-b md:border-b-0 md:border-r border-stone-100 w-full md:w-auto">
+        <div className="bg-white rounded-2xl md:rounded-full p-3 md:p-2 shadow-2xl flex flex-col md:flex-row items-stretch md:items-center max-w-3xl mx-auto gap-2 md:gap-0">
+          <div className="flex-1 px-4 md:px-6 py-2 text-left border-b md:border-b-0 md:border-r border-stone-100">
             <label className="block text-[10px] uppercase tracking-tighter text-stone-400 font-bold">
               Cosa cerchi?
             </label>
-            {/* Text input on desktop, hidden on mobile */}
             <input
               className="hidden md:block w-full border-none focus:ring-0 p-0 text-emerald-900 placeholder:text-stone-300 bg-transparent font-display text-sm"
               placeholder="Ristoranti, esperienze..."
               type="text"
             />
-            {/* Select on mobile */}
             <select className="md:hidden w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm">
               <option value="">Ristoranti, esperienze...</option>
               <option>Ristoranti</option>
@@ -41,24 +39,22 @@ export default function Hero() {
               <option>Pasticcerie</option>
             </select>
           </div>
-          <div className="flex-1 px-6 py-2 text-left w-full md:w-auto">
+          <div className="flex-1 px-4 md:px-6 py-2 text-left">
             <label className="block text-[10px] uppercase tracking-tighter text-stone-400 font-bold">
               Dove?
             </label>
-            {/* Text input on desktop */}
             <input
               className="hidden md:block w-full border-none focus:ring-0 p-0 text-emerald-900 placeholder:text-stone-300 bg-transparent font-display text-sm"
               placeholder="Paestum, Eboli, Salerno"
               type="text"
             />
-            {/* Select on mobile */}
             <select className="md:hidden w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm">
               {locationOptions.map((loc) => (
                 <option key={loc}>{loc}</option>
               ))}
             </select>
           </div>
-          <button className="bg-primary hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg flex items-center gap-2 w-full md:w-auto justify-center font-display text-sm">
+          <button className="bg-primary hover:bg-orange-600 text-white px-8 py-4 rounded-xl md:rounded-full font-bold transition-all shadow-lg flex items-center gap-2 justify-center font-display text-sm">
             <span className="material-symbols-outlined text-sm">search</span>{" "}
             Cerca
           </button>
