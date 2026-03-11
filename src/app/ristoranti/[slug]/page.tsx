@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getListingBySlug, getDetailPageSlugs } from "@/lib/queries";
+import { getListingBySlug } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RestaurantHero from "@/components/RestaurantHero";
@@ -14,13 +14,10 @@ import RestaurantBooking from "@/components/RestaurantBooking";
 import RestaurantSimilar from "@/components/RestaurantSimilar";
 import MobileBookingButton from "@/components/MobileBookingButton";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const slugs = await getDetailPageSlugs();
-  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -10,6 +10,8 @@ import MapSection from "@/components/MapSection";
 import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>

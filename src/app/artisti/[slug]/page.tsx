@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getArtistBySlug, getArtistDetailSlugs } from "@/lib/queries";
+import { getArtistBySlug } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistHero from "@/components/ArtistHero";
@@ -9,13 +9,10 @@ import ArtistGallery from "@/components/ArtistGallery";
 import ArtistVideos from "@/components/ArtistVideos";
 import ArtistSocials from "@/components/ArtistSocials";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const slugs = await getArtistDetailSlugs();
-  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

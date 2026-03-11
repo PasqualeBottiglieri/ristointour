@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import ArtistGrid from "@/components/ArtistGrid";
 import { getPublishedArtists } from "@/lib/queries";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Artisti & Musica per Eventi | Ristointour",
   description:
