@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import type { Listing } from "@/generated/prisma/client";
+import type { GooglePlaceDetails } from "@/lib/google-places";
 import ImageUpload from "./ImageUpload";
 import GalleryUpload from "./GalleryUpload";
+import GooglePlacesSearch from "./GooglePlacesSearch";
 
 interface GalleryImage {
   src: string;
@@ -17,9 +20,57 @@ interface ListingFormProps {
 
 export default function ListingForm({ listing, action }: ListingFormProps) {
   const isEdit = !!listing;
+  const [googleData, setGoogleData] = useState<GooglePlaceDetails | null>(null);
+  const [formKey, setFormKey] = useState(0);
+  const [imported, setImported] = useState(false);
+
+  function handlePlaceSelected(details: GooglePlaceDetails) {
+    setGoogleData(details);
+    setImported(true);
+    setFormKey((k) => k + 1);
+  }
+
+  // Helper: google data takes priority over listing data for autofill
+  const gd = googleData;
+
+  // Estrae "Battipaglia SA, Italy" da "Via Paolo Baratta, 6, 84091 Battipaglia SA, Italy"
+  function extractLocation(address?: string): string {
+    if (!address) return "";
+    // Rimuove il CAP (5 cifre) e prende da lì in poi
+    const match = address.match(/\d{5}\s+(.+)/);
+    if (match) return match[1];
+    // Fallback: ultime 2 parti separate da virgola
+    const parts = address.split(",").map((p) => p.trim());
+    return parts.length >= 2 ? parts.slice(-2).join(", ") : address;
+  }
 
   return (
-    <form action={action} className="space-y-8 max-w-4xl">
+    <div className="space-y-6 max-w-4xl">
+      <GooglePlacesSearch
+        onPlaceSelected={handlePlaceSelected}
+        existingPlaceId={listing?.googlePlaceId}
+      />
+
+      {imported && (
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-2">
+          <span className="material-symbols-outlined text-emerald-600 text-lg">
+            check_circle
+          </span>
+          <span className="text-sm text-emerald-800 font-medium">
+            Dati importati da Google Places! Verifica e completa i campi
+            sottostanti.
+          </span>
+        </div>
+      )}
+
+      <form key={formKey} action={action} className="space-y-8">
+      {/* Hidden Google Places metadata */}
+      <input type="hidden" name="googlePlaceId" value={gd?.placeId ?? listing?.googlePlaceId ?? ""} />
+      <input type="hidden" name="latitude" value={gd?.latitude ?? listing?.latitude ?? ""} />
+      <input type="hidden" name="longitude" value={gd?.longitude ?? listing?.longitude ?? ""} />
+      <input type="hidden" name="googleMapsUrl" value={gd?.googleMapsUrl ?? listing?.googleMapsUrl ?? ""} />
+      <input type="hidden" name="sourceProvider" value={gd ? "google" : listing?.sourceProvider ?? "manual"} />
+
       {/* Basic Info */}
       <fieldset className="bg-white rounded-xl border border-stone-200 p-6 space-y-4">
         <legend className="text-sm font-bold uppercase tracking-widest text-stone-500 px-2">
@@ -34,7 +85,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             <input
               name="name"
               required
-              defaultValue={listing?.name}
+              defaultValue={gd?.name ?? listing?.name ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -46,7 +97,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             <select
               name="category"
               required
-              defaultValue={listing?.category || "ristorante"}
+              defaultValue={gd?.category ?? listing?.category ?? "ristorante"}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             >
               <option value="ristorante">Ristorante</option>
@@ -68,7 +119,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             <input
               name="location"
               required
-              defaultValue={listing?.location}
+              defaultValue={extractLocation(gd?.address) || listing?.location || ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
               placeholder="Paestum, Campania"
             />
@@ -92,7 +143,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
           </label>
           <input
             name="address"
-            defaultValue={listing?.address || ""}
+            defaultValue={gd?.address ?? listing?.address ?? ""}
             className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             placeholder="Via Roma 15, 84047 Paestum (SA)"
           />
@@ -136,7 +187,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             </label>
             <input
               name="phone"
-              defaultValue={listing?.phone || ""}
+              defaultValue={gd?.phone ?? listing?.phone ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -146,7 +197,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             </label>
             <input
               name="website"
-              defaultValue={listing?.website || ""}
+              defaultValue={gd?.website ?? listing?.website ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -225,7 +276,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
               step="0.1"
               min="0"
               max="5"
-              defaultValue={listing?.rating ?? ""}
+              defaultValue={gd?.rating ?? listing?.rating ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -236,7 +287,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             <input
               name="reviewCount"
               type="number"
-              defaultValue={listing?.reviewCount ?? ""}
+              defaultValue={gd?.reviewCount ?? listing?.reviewCount ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -246,7 +297,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             </label>
             <input
               name="priceRange"
-              defaultValue={listing?.priceRange || ""}
+              defaultValue={gd?.priceRange ?? listing?.priceRange ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
               placeholder="€€"
             />
@@ -270,7 +321,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             </label>
             <input
               name="openTime"
-              defaultValue={listing?.openTime || ""}
+              defaultValue={gd?.openTime ?? listing?.openTime ?? ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
@@ -333,7 +384,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             <textarea
               name="hours"
               rows={3}
-              defaultValue={listing?.hours ? JSON.stringify(listing.hours, null, 2) : ""}
+              defaultValue={gd?.hours?.length ? JSON.stringify(gd.hours, null, 2) : listing?.hours ? JSON.stringify(listing.hours, null, 2) : ""}
               className="w-full px-4 py-2.5 rounded-lg border border-stone-300 text-xs font-mono focus:ring-2 focus:ring-primary focus:border-primary"
               placeholder='[{"day": "Lunedì", "time": "Chiuso"}]'
             />
@@ -447,5 +498,6 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
         </a>
       </div>
     </form>
+    </div>
   );
 }

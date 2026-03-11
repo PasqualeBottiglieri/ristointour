@@ -66,6 +66,13 @@ export async function createListing(formData: FormData) {
       featured: formData.get("featured") === "on",
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
+      googlePlaceId: (formData.get("googlePlaceId") as string) || null,
+      latitude: formData.get("latitude") ? parseFloat(formData.get("latitude") as string) : null,
+      longitude: formData.get("longitude") ? parseFloat(formData.get("longitude") as string) : null,
+      googleMapsUrl: (formData.get("googleMapsUrl") as string) || null,
+      sourceProvider: (formData.get("sourceProvider") as string) || "manual",
+      sourceLastSyncedAt: (formData.get("googlePlaceId") as string) ? new Date() : null,
+      enrichmentStatus: (formData.get("googlePlaceId") as string) ? "complete" : "none",
     },
   });
 
@@ -116,6 +123,13 @@ export async function updateListing(id: string, formData: FormData) {
       featured: formData.get("featured") === "on",
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
+      googlePlaceId: (formData.get("googlePlaceId") as string) || null,
+      latitude: formData.get("latitude") ? parseFloat(formData.get("latitude") as string) : null,
+      longitude: formData.get("longitude") ? parseFloat(formData.get("longitude") as string) : null,
+      googleMapsUrl: (formData.get("googleMapsUrl") as string) || null,
+      sourceProvider: (formData.get("sourceProvider") as string) || "manual",
+      sourceLastSyncedAt: (formData.get("googlePlaceId") as string) ? new Date() : null,
+      enrichmentStatus: (formData.get("googlePlaceId") as string) ? "complete" : "none",
     },
   });
 
