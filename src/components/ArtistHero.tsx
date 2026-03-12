@@ -5,14 +5,14 @@ export default function ArtistHero({ artist }: { artist: Artist }) {
   const eventTypes = jsonArray<string>(artist.eventTypes);
 
   return (
-    <section className="relative h-[55vh] min-h-[420px] md:h-[60vh] md:min-h-[500px] flex items-end">
+    <section className="relative h-[55vh] min-h-[420px] md:h-[60vh] md:min-h-[500px] flex items-end bg-emerald-950">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={artist.image}
         alt={artist.name}
-        className="absolute inset-0 w-full h-full object-cover object-top"
+        className="absolute inset-0 w-full h-full object-contain"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/95 via-emerald-950/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/95 via-emerald-950/40 to-emerald-950/20" />
       <div className="relative max-w-7xl mx-auto px-4 pb-14 md:pb-16 w-full">
         {artist.badge && (
           <span

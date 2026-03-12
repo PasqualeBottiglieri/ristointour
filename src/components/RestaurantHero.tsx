@@ -2,12 +2,14 @@ import type { Listing } from "@/lib/types";
 
 export default function RestaurantHero({ restaurant }: { restaurant: Listing }) {
   return (
-    <section className="relative h-[60vh] min-h-[450px] rounded-2xl overflow-hidden group">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-        style={{ backgroundImage: `url('${restaurant.heroImage || restaurant.image}')` }}
+    <section className="relative h-[60vh] min-h-[450px] rounded-2xl overflow-hidden group bg-emerald-950">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={restaurant.heroImage || restaurant.image}
+        alt={restaurant.name}
+        className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
       <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
           {restaurant.badge && (

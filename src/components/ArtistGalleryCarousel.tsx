@@ -90,7 +90,7 @@ export default function ArtistGalleryCarousel({ artist }: { artist: Artist }) {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          <div className="aspect-[3/2] md:aspect-[21/9] relative overflow-hidden">
+          <div className="aspect-[3/2] md:aspect-[16/9] relative overflow-hidden bg-stone-900">
             <div
               className="flex h-full transition-transform duration-500 ease-out will-change-transform"
               style={{ transform: `translateX(-${current * 100}%)` }}
@@ -107,7 +107,7 @@ export default function ArtistGalleryCarousel({ artist }: { artist: Artist }) {
                   <img
                     src={img.src}
                     alt={img.alt || `${artist.name} - foto ${i + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     loading={i === 0 ? "eager" : "lazy"}
                   />
                 </div>
