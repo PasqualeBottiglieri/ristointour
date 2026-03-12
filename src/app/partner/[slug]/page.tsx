@@ -41,6 +41,7 @@ export default async function SponsorDetailPage({ params }: PageProps) {
               src={sponsor.coverImage}
               alt={sponsor.name}
               fill
+              unoptimized
               className="object-cover opacity-30"
               priority
             />
@@ -53,6 +54,7 @@ export default async function SponsorDetailPage({ params }: PageProps) {
                 src={sponsor.logo}
                 alt={`${sponsor.name} logo`}
                 fill
+                unoptimized
                 className="object-contain p-3"
               />
             </div>

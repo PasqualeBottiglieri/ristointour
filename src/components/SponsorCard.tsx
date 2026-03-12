@@ -20,6 +20,7 @@ function FeaturedCard({ sponsor }: { sponsor: Sponsor }) {
             src={sponsor.coverImage}
             alt={sponsor.name}
             fill
+            unoptimized
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
           {sponsor.badge && (
@@ -36,6 +37,7 @@ function FeaturedCard({ sponsor }: { sponsor: Sponsor }) {
               src={sponsor.logo}
               alt={`${sponsor.name} logo`}
               fill
+              unoptimized
               className="object-contain p-2"
             />
           </div>
@@ -76,6 +78,7 @@ function CompactCard({ sponsor }: { sponsor: Sponsor }) {
           src={sponsor.logo}
           alt={`${sponsor.name} logo`}
           fill
+          unoptimized
           className="object-contain p-2"
         />
       </div>

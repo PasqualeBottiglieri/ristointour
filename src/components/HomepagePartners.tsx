@@ -31,6 +31,7 @@ export default async function HomepagePartners() {
                   src={s.logo}
                   alt={s.name}
                   fill
+                  unoptimized
                   className="object-contain"
                 />
               </div>
