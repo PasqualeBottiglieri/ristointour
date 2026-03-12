@@ -1,8 +1,11 @@
 import AdminShell from "@/components/admin/AdminShell";
 import ArtistForm from "@/components/admin/ArtistForm";
 import { createArtist } from "../actions";
+import { getAllArtistFilterOptions } from "@/lib/queries";
 
-export default function NewArtistPage() {
+export default async function NewArtistPage() {
+  const filterOptions = await getAllArtistFilterOptions();
+
   return (
     <AdminShell>
       <div className="mb-8">
@@ -11,7 +14,7 @@ export default function NewArtistPage() {
           Aggiungi un nuovo musicista, band o performer
         </p>
       </div>
-      <ArtistForm action={createArtist} />
+      <ArtistForm action={createArtist} filterOptions={filterOptions} />
     </AdminShell>
   );
 }

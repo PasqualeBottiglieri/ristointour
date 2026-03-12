@@ -78,30 +78,38 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 - Newsletter */}
+          {/* Column 4 - Contatti */}
           <div>
             <h4 className="text-xs uppercase tracking-widest font-bold mb-6 text-orange-600 font-display">
-              Newsletter
+              Contatti
             </h4>
-            <p className="text-stone-400 text-xs mb-4 italic font-display">
-              Iscriviti per ricevere guide e offerte esclusive.
+            <p className="text-white text-sm font-bold mb-4 font-display">
+              Mimmo Bruno
             </p>
-            <div className="flex flex-col gap-2">
-              <input
-                className="bg-emerald-900/50 border-stone-800 rounded-lg px-4 py-2 text-sm focus:ring-primary focus:border-primary text-white placeholder:text-stone-500 font-display"
-                placeholder="Il tuo indirizzo email"
-                type="email"
-              />
-              <button className="bg-primary hover:bg-orange-600 py-2 rounded-lg text-sm font-bold transition-all font-display">
-                Iscriviti
-              </button>
-            </div>
+            <ul className="space-y-3 text-stone-400 text-sm font-display">
+              <li className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-stone-500">mail</span>
+                <a href="mailto:hokelsoul60@gmail.com" className="hover:text-white transition-colors">
+                  hokelsoul60@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-stone-500">call</span>
+                <a href="tel:+393385940445" className="hover:text-white transition-colors">
+                  +39 338 594 0445
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-stone-500">location_on</span>
+                <span>Piana del Sele, Salerno</span>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-500 text-[10px] uppercase tracking-widest font-display">
-          <p>&copy; 2024 Ristointour. All rights reserved.</p>
+          <p>&copy; 2025 Ristointour. All rights reserved.</p>
           <div className="flex gap-6">
             <a className="hover:text-white" href="#">
               Privacy Policy

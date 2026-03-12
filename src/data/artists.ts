@@ -38,33 +38,6 @@ export interface Artist extends PlanFields {
   socialLinks?: { platform: string; url: string }[];
 }
 
-export const artistGenres = [
-  "Jazz & Soul",
-  "Musica Napoletana",
-  "Pop & Rock",
-  "DJ Set",
-  "Musica Classica",
-  "Folk & Tradizionale",
-];
-
-export const artistLocations = [
-  "Paestum",
-  "Eboli",
-  "Battipaglia",
-  "Salerno",
-  "Capaccio",
-  "Agropoli",
-];
-
-export const artistEventTypes = [
-  "Matrimoni",
-  "Cene Private",
-  "Feste Aziendali",
-  "Aperitivi",
-  "Eventi all'Aperto",
-  "Sagre & Festival",
-];
-
 export const artists: Artist[] = [
   {
     slug: "marco-russo",

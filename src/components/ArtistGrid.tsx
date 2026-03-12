@@ -2,19 +2,26 @@
 
 import { useState, useMemo } from "react";
 import type { Artist } from "@/lib/types";
-import { jsonArray } from "@/lib/types";
+import { jsonArray, parseGenres } from "@/lib/types";
 import ArtistCard from "./ArtistCard";
 import ArtistCardBasic from "./ArtistCardBasic";
 import ArtistFilterBar from "./ArtistFilterBar";
 
-export default function ArtistGrid({ artists }: { artists: Artist[] }) {
+interface ArtistGridProps {
+  artists: Artist[];
+  genres: string[];
+  locations: string[];
+  eventTypes: string[];
+}
+
+export default function ArtistGrid({ artists, genres, locations, eventTypes }: ArtistGridProps) {
   const [genre, setGenre] = useState("");
   const [location, setLocation] = useState("");
   const [eventType, setEventType] = useState("");
 
   const filtered = useMemo(() => {
     return artists.filter((a) => {
-      if (genre && a.genre !== genre) return false;
+      if (genre && !parseGenres(a.genre).includes(genre)) return false;
       if (location && a.location !== location) return false;
       if (eventType) {
         const types = jsonArray<string>(a.eventTypes);
@@ -30,6 +37,9 @@ export default function ArtistGrid({ artists }: { artists: Artist[] }) {
   return (
     <div>
       <ArtistFilterBar
+        genres={genres}
+        locations={locations}
+        eventTypes={eventTypes}
         genre={genre}
         location={location}
         eventType={eventType}

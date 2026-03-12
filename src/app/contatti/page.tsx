@@ -26,7 +26,10 @@ export default function ContattiPage() {
             {/* Contact info */}
             <div className="space-y-10">
               <div>
-                <h2 className="text-2xl font-black mb-6">Parliamone</h2>
+                <h2 className="text-2xl font-black mb-2">Parliamone</h2>
+                <p className="text-stone-500 font-display text-sm mb-6">
+                  Ideatore del progetto: <span className="font-bold text-stone-700">Mimmo Bruno</span>
+                </p>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
@@ -37,10 +40,10 @@ export default function ContattiPage() {
                         Email
                       </p>
                       <a
-                        href="mailto:info@ristointour.it"
+                        href="mailto:hokelsoul60@gmail.com"
                         className="text-lg font-semibold hover:text-primary transition-colors"
                       >
-                        info@ristointour.it
+                        hokelsoul60@gmail.com
                       </a>
                     </div>
                   </div>
@@ -53,10 +56,10 @@ export default function ContattiPage() {
                         Telefono
                       </p>
                       <a
-                        href="tel:+390891234567"
+                        href="tel:+393385940445"
                         className="text-lg font-semibold hover:text-primary transition-colors"
                       >
-                        +39 089 123 4567
+                        +39 338 594 0445
                       </a>
                     </div>
                   </div>
@@ -89,7 +92,7 @@ export default function ContattiPage() {
                   Contattaci per scoprire come entrare nel portale.
                 </p>
                 <a
-                  href="mailto:partner@ristointour.it"
+                  href="mailto:hokelsoul60@gmail.com"
                   className="inline-block px-6 py-3 bg-primary text-white font-bold uppercase tracking-widest text-xs rounded-lg hover:bg-orange-600 transition-colors font-display"
                 >
                   Diventa Partner

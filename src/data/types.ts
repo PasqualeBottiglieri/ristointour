@@ -1,4 +1,4 @@
-export type PlanType = "basic" | "premium" | "sponsor";
+export type PlanType = "basic" | "premium";
 
 export interface PlanFields {
   planType: PlanType;
@@ -19,7 +19,7 @@ export function homepageEntries<T extends PlanFields>(items: T[]): T[] {
     .sort((a, b) => a.displayPriority - b.displayPriority);
 }
 
-/** Helper: get only entries that have detail pages (premium + sponsor) */
+/** Helper: get only entries that have detail pages (premium) */
 export function detailPageEntries<T extends PlanFields>(items: T[]): T[] {
   return items.filter((item) => item.hasDetailPage);
 }

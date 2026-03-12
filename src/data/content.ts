@@ -12,6 +12,7 @@ export const navLinks = [
   { label: "Esperienze", href: "/esperienze" },
   { label: "Territori", href: "/territori" },
   { label: "Artisti", href: "/artisti" },
+  { label: "Partner", href: "/partner" },
   { label: "Contatti", href: "/contatti" },
 ];
 
@@ -97,18 +98,10 @@ export const mapPins = [
   { label: "Vannulo Farm", bottom: "33%", left: "50%" },
 ];
 
-export const sponsors = [
-  "Cilentum",
-  "SeleFood",
-  "AmalfiCoast",
-  "BioPaestum",
-  "TerraNostra",
-];
-
 export const footerQuickLinks = [
   { label: "Esperienze", href: "/esperienze" },
   { label: "Territori", href: "/territori" },
-  { label: "Diventa Partner", href: "/contatti" },
+  { label: "Diventa Partner", href: "/partner" },
   { label: "Contatti", href: "/contatti" },
 ];
 
@@ -127,31 +120,3 @@ export const locationOptions = [
   "Salerno",
 ];
 
-// ── Artist filter options ──────────────────────────────────────────
-
-export const artistGenres = [
-  "Jazz & Soul",
-  "Musica Napoletana",
-  "Pop & Rock",
-  "DJ Set",
-  "Musica Classica",
-  "Folk & Tradizionale",
-];
-
-export const artistLocations = [
-  "Paestum",
-  "Eboli",
-  "Battipaglia",
-  "Salerno",
-  "Capaccio",
-  "Agropoli",
-];
-
-export const artistEventTypes = [
-  "Matrimoni",
-  "Cene Private",
-  "Feste Aziendali",
-  "Aperitivi",
-  "Eventi all'Aperto",
-  "Sagre & Festival",
-];

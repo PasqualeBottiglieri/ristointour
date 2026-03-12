@@ -26,6 +26,8 @@ function parseJson(value: string | null): Prisma.InputJsonValue | typeof Prisma.
 export async function createArtist(formData: FormData) {
   const name = formData.get("name") as string;
   const slug = slugify(name);
+  const planType = formData.get("planType") as string;
+  const isPremium = planType === "premium";
 
   await prisma.artist.create({
     data: {
@@ -44,10 +46,10 @@ export async function createArtist(formData: FormData) {
       videoEmbeds: parseJson(formData.get("videoEmbeds") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
       eventTypes: parseJson(formData.get("eventTypes") as string),
-      planType: formData.get("planType") as string,
-      showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage: formData.get("hasDetailPage") === "on",
-      featured: formData.get("featured") === "on",
+      planType,
+      showOnHomepage: true,
+      hasDetailPage: isPremium,
+      featured: isPremium,
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
     },
@@ -59,6 +61,9 @@ export async function createArtist(formData: FormData) {
 }
 
 export async function updateArtist(id: string, formData: FormData) {
+  const planType = formData.get("planType") as string;
+  const isPremium = planType === "premium";
+
   await prisma.artist.update({
     where: { id },
     data: {
@@ -76,10 +81,10 @@ export async function updateArtist(id: string, formData: FormData) {
       videoEmbeds: parseJson(formData.get("videoEmbeds") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
       eventTypes: parseJson(formData.get("eventTypes") as string),
-      planType: formData.get("planType") as string,
-      showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage: formData.get("hasDetailPage") === "on",
-      featured: formData.get("featured") === "on",
+      planType,
+      showOnHomepage: true,
+      hasDetailPage: isPremium,
+      featured: isPremium,
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
     },

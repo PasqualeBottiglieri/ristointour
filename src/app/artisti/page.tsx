@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistGrid from "@/components/ArtistGrid";
-import { getPublishedArtists } from "@/lib/queries";
+import { getPublishedArtists, extractArtistFilterOptions } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 export default async function ArtistiPage() {
   const artists = await getPublishedArtists();
+  const { genres, locations, eventTypes } = extractArtistFilterOptions(artists);
 
   return (
     <>
@@ -29,7 +30,12 @@ export default async function ArtistiPage() {
               Dai matrimoni alle feste aziendali, dalla musica classica al DJ set.
             </p>
           </div>
-          <ArtistGrid artists={artists} />
+          <ArtistGrid
+            artists={artists}
+            genres={genres}
+            locations={locations}
+            eventTypes={eventTypes}
+          />
         </div>
       </section>
       <Footer />

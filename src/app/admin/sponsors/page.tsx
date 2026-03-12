@@ -1,27 +1,35 @@
 import AdminShell from "@/components/admin/AdminShell";
 import Link from "next/link";
-import { getAllArtists } from "@/lib/queries";
-import { parseGenres } from "@/lib/types";
-import { DeleteArtistButton } from "@/components/admin/DeleteArtistButton";
+import { getAllSponsors } from "@/lib/queries";
+import { DeleteSponsorButton } from "@/components/admin/DeleteSponsorButton";
 
-export default async function ArtistsPage() {
-  const artists = await getAllArtists();
+const TYPE_LABELS: Record<string, string> = {
+  main_sponsor: "Main Sponsor",
+  media_partner: "Media Partner",
+  technical_partner: "Partner Tecnico",
+  food_partner: "Partner Food",
+  territorial_partner: "Partner Territoriale",
+  partner: "Partner",
+};
+
+export default async function SponsorsPage() {
+  const sponsors = await getAllSponsors();
 
   return (
     <AdminShell>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-black">Artisti</h1>
+          <h1 className="text-3xl font-black">Sponsor</h1>
           <p className="text-stone-500 font-display mt-1">
-            Gestisci musicisti, band, DJ e performer
+            Gestisci sponsor e partner del progetto
           </p>
         </div>
         <Link
-          href="/admin/artists/new"
+          href="/admin/sponsors/new"
           className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-orange-600 transition-colors"
         >
           <span className="material-symbols-outlined text-lg">add</span>
-          Nuovo Artista
+          Nuovo Sponsor
         </Link>
       </div>
 
@@ -36,10 +44,10 @@ export default async function ArtistsPage() {
                 Tipo
               </th>
               <th className="text-left px-6 py-3 font-bold text-xs uppercase tracking-widest text-stone-500">
-                Genere
+                In Evidenza
               </th>
               <th className="text-left px-6 py-3 font-bold text-xs uppercase tracking-widest text-stone-500">
-                Piano
+                Homepage
               </th>
               <th className="text-left px-6 py-3 font-bold text-xs uppercase tracking-widest text-stone-500">
                 Stato
@@ -50,49 +58,47 @@ export default async function ArtistsPage() {
             </tr>
           </thead>
           <tbody>
-            {artists.map((artist) => (
+            {sponsors.map((sponsor) => (
               <tr
-                key={artist.id}
+                key={sponsor.id}
                 className="border-b border-stone-100 hover:bg-stone-50"
               >
                 <td className="px-6 py-4">
-                  <div className="font-bold">{artist.name}</div>
-                  <div className="text-stone-400 text-xs">{artist.location}</div>
+                  <div className="font-bold">{sponsor.name}</div>
+                  <div className="text-stone-400 text-xs">{sponsor.shortDescription}</div>
                 </td>
-                <td className="px-6 py-4 capitalize text-stone-600">
-                  {artist.artistType}
+                <td className="px-6 py-4 text-stone-600">
+                  {TYPE_LABELS[sponsor.sponsorType] || sponsor.sponsorType}
                 </td>
-                <td className="px-6 py-4 text-stone-600">{parseGenres(artist.genre).join(", ")}</td>
                 <td className="px-6 py-4">
-                  <span
-                    className={`inline-block px-2 py-1 rounded text-xs font-bold uppercase ${
-                      artist.planType === "premium"
-                        ? "bg-orange-100 text-orange-700"
-                        : "bg-stone-100 text-stone-600"
-                    }`}
-                  >
-                    {artist.planType}
-                  </span>
+                  {sponsor.featured && (
+                    <span className="material-symbols-outlined text-orange-500 text-lg">star</span>
+                  )}
+                </td>
+                <td className="px-6 py-4">
+                  {sponsor.showOnHomepage && (
+                    <span className="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                  )}
                 </td>
                 <td className="px-6 py-4">
                   <span
                     className={`inline-block size-2.5 rounded-full ${
-                      artist.status === "published"
+                      sponsor.status === "published"
                         ? "bg-green-500"
                         : "bg-stone-300"
                     }`}
                   />
-                  <span className="ml-2 text-xs capitalize">{artist.status}</span>
+                  <span className="ml-2 text-xs capitalize">{sponsor.status}</span>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
                     <Link
-                      href={`/admin/artists/${artist.id}/edit`}
+                      href={`/admin/sponsors/${sponsor.id}/edit`}
                       className="text-emerald-700 hover:text-emerald-900 font-medium text-xs"
                     >
                       Modifica
                     </Link>
-                    <DeleteArtistButton id={artist.id} name={artist.name} />
+                    <DeleteSponsorButton id={sponsor.id} name={sponsor.name} />
                   </div>
                 </td>
               </tr>

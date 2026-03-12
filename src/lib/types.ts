@@ -1,7 +1,7 @@
-import type { Listing, Artist } from "@/generated/prisma/client";
+import type { Listing, Artist, Sponsor } from "@/generated/prisma/client";
 
 // Re-export Prisma types
-export type { Listing, Artist };
+export type { Listing, Artist, Sponsor };
 
 // ── JSON sub-types for Listing ─────────────────────────────────────
 
@@ -52,4 +52,19 @@ export interface ArtistSocial {
 export function jsonArray<T>(value: unknown): T[] {
   if (Array.isArray(value)) return value as T[];
   return [];
+}
+
+/**
+ * Parse genre field — handles both legacy single string ("Jazz & Soul")
+ * and new JSON array format ('["Jazz & Soul","Pop & Rock"]').
+ */
+export function parseGenres(genre: string | null | undefined): string[] {
+  if (!genre) return [];
+  try {
+    const parsed = JSON.parse(genre);
+    if (Array.isArray(parsed)) return parsed;
+  } catch {
+    // not JSON — legacy plain string
+  }
+  return [genre];
 }

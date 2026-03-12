@@ -6,6 +6,7 @@ const navItems = [
   { href: "/admin/dashboard", icon: "dashboard", label: "Dashboard" },
   { href: "/admin/activities", icon: "store", label: "Attività" },
   { href: "/admin/artists", icon: "music_note", label: "Artisti" },
+  { href: "/admin/sponsors", icon: "handshake", label: "Sponsor" },
 ];
 
 export default async function AdminShell({

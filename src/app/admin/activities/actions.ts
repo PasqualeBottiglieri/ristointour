@@ -27,7 +27,7 @@ export async function createListing(formData: FormData) {
   const name = formData.get("name") as string;
   const slug = slugify(name);
   const planType = formData.get("planType") as string;
-  const hasDetailPage = planType !== "basic" || formData.get("hasDetailPage") === "on";
+  const isPremium = planType === "premium";
 
   await prisma.listing.create({
     data: {
@@ -61,9 +61,9 @@ export async function createListing(formData: FormData) {
       hours: parseJson(formData.get("hours") as string),
       reviews: parseJson(formData.get("reviews") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
-      showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage,
-      featured: formData.get("featured") === "on",
+      showOnHomepage: true,
+      hasDetailPage: isPremium,
+      featured: isPremium,
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
       googlePlaceId: (formData.get("googlePlaceId") as string) || null,
@@ -84,7 +84,7 @@ export async function createListing(formData: FormData) {
 
 export async function updateListing(id: string, formData: FormData) {
   const planType = formData.get("planType") as string;
-  const hasDetailPage = planType !== "basic" || formData.get("hasDetailPage") === "on";
+  const isPremium = planType === "premium";
 
   await prisma.listing.update({
     where: { id },
@@ -118,9 +118,9 @@ export async function updateListing(id: string, formData: FormData) {
       hours: parseJson(formData.get("hours") as string),
       reviews: parseJson(formData.get("reviews") as string),
       socialLinks: parseJson(formData.get("socialLinks") as string),
-      showOnHomepage: formData.get("showOnHomepage") === "on",
-      hasDetailPage,
-      featured: formData.get("featured") === "on",
+      showOnHomepage: true,
+      hasDetailPage: isPremium,
+      featured: isPremium,
       displayPriority: parseInt((formData.get("displayPriority") as string) || "100"),
       status: formData.get("status") as string,
       googlePlaceId: (formData.get("googlePlaceId") as string) || null,

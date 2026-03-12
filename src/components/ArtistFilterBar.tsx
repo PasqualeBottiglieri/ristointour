@@ -1,8 +1,9 @@
 "use client";
 
-import { artistGenres, artistLocations, artistEventTypes } from "@/data/content";
-
 interface ArtistFilterBarProps {
+  genres: string[];
+  locations: string[];
+  eventTypes: string[];
   genre: string;
   location: string;
   eventType: string;
@@ -12,6 +13,9 @@ interface ArtistFilterBarProps {
 }
 
 export default function ArtistFilterBar({
+  genres,
+  locations,
+  eventTypes,
   genre,
   location,
   eventType,
@@ -30,7 +34,7 @@ export default function ArtistFilterBar({
         onChange={(e) => onGenreChange(e.target.value)}
       >
         <option value="">Tutti i Generi</option>
-        {artistGenres.map((g) => (
+        {genres.map((g) => (
           <option key={g} value={g}>
             {g}
           </option>
@@ -43,7 +47,7 @@ export default function ArtistFilterBar({
         onChange={(e) => onLocationChange(e.target.value)}
       >
         <option value="">Tutte le Zone</option>
-        {artistLocations.map((l) => (
+        {locations.map((l) => (
           <option key={l} value={l}>
             {l}
           </option>
@@ -56,7 +60,7 @@ export default function ArtistFilterBar({
         onChange={(e) => onEventTypeChange(e.target.value)}
       >
         <option value="">Tutti gli Eventi</option>
-        {artistEventTypes.map((e) => (
+        {eventTypes.map((e) => (
           <option key={e} value={e}>
             {e}
           </option>

@@ -3,12 +3,14 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminDashboard() {
-  const [listingCount, artistCount, publishedListings, publishedArtists] =
+  const [listingCount, artistCount, sponsorCount, publishedListings, publishedArtists, publishedSponsors] =
     await Promise.all([
       prisma.listing.count(),
       prisma.artist.count(),
+      prisma.sponsor.count(),
       prisma.listing.count({ where: { status: "published" } }),
       prisma.artist.count({ where: { status: "published" } }),
+      prisma.sponsor.count({ where: { status: "published" } }),
     ]);
 
   const stats = [
@@ -35,6 +37,18 @@ export default async function AdminDashboard() {
       value: publishedArtists,
       icon: "check_circle",
       href: "/admin/artists",
+    },
+    {
+      label: "Sponsor Totali",
+      value: sponsorCount,
+      icon: "handshake",
+      href: "/admin/sponsors",
+    },
+    {
+      label: "Sponsor Pubblicati",
+      value: publishedSponsors,
+      icon: "check_circle",
+      href: "/admin/sponsors",
     },
   ];
 
@@ -81,6 +95,13 @@ export default async function AdminDashboard() {
         >
           <span className="material-symbols-outlined text-lg">add</span>
           Nuovo Artista
+        </Link>
+        <Link
+          href="/admin/sponsors/new"
+          className="inline-flex items-center gap-2 bg-emerald-700 text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-emerald-800 transition-colors"
+        >
+          <span className="material-symbols-outlined text-lg">add</span>
+          Nuovo Sponsor
         </Link>
       </div>
     </AdminShell>

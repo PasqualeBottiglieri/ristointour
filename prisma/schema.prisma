@@ -107,6 +107,36 @@ model Artist {
   @@index([showOnHomepage])
 }
 
+model Sponsor {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  logo             String
+  coverImage       String?
+  shortDescription String
+  fullDescription  String?
+  website          String?
+  email            String?
+  phone            String?
+  sponsorType      String   @default("partner")
+  category         String?
+  badge            String?
+  ctaLabel         String?
+  ctaUrl           String?
+  featured         Boolean  @default(false)
+  showOnHomepage   Boolean  @default(true)
+  hasDetailPage    Boolean  @default(false)
+  displayPriority  Int      @default(100)
+  status           String   @default("draft")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status])
+  @@index([sponsorType])
+  @@index([showOnHomepage])
+  @@index([displayPriority])
+}
+
 model AdminUser {
   id           String   @id @default(cuid())
   email        String   @unique

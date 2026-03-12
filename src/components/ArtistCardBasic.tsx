@@ -1,5 +1,5 @@
 import type { Artist } from "@/lib/types";
-import { jsonArray } from "@/lib/types";
+import { jsonArray, parseGenres } from "@/lib/types";
 
 export default function ArtistCardBasic({ artist }: { artist: Artist }) {
   const eventTypes = jsonArray<string>(artist.eventTypes);
@@ -20,7 +20,7 @@ export default function ArtistCardBasic({ artist }: { artist: Artist }) {
       <div className="flex-1 min-w-0">
         <h4 className="font-bold text-sm truncate">{artist.name}</h4>
         <p className="text-stone-500 text-xs font-display truncate">
-          {artist.genre} &middot; {eventTypes[0]}
+          {parseGenres(artist.genre).join(", ")} &middot; {eventTypes[0]}
         </p>
         <div className="flex items-center gap-1 text-stone-400 mt-1">
           <span className="material-symbols-outlined text-xs">location_on</span>

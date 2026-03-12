@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArtistBySlug } from "@/lib/queries";
+import { parseGenres } from "@/lib/types";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistHero from "@/components/ArtistHero";
 import ArtistBio from "@/components/ArtistBio";
-import ArtistGallery from "@/components/ArtistGallery";
-import ArtistVideos from "@/components/ArtistVideos";
+import ArtistGalleryCarousel from "@/components/ArtistGalleryCarousel";
+import ArtistVideoCarousel from "@/components/ArtistVideoCarousel";
 import ArtistSocials from "@/components/ArtistSocials";
 
 export const dynamic = "force-dynamic";
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!artist) return { title: "Artista non trovato | Ristointour" };
 
   return {
-    title: `${artist.name} - ${artist.genre} | Ristointour`,
+    title: `${artist.name} - ${parseGenres(artist.genre).join(", ")} | Ristointour`,
     description: artist.shortDescription,
   };
 }
@@ -37,8 +38,8 @@ export default async function ArtistPage({ params }: PageProps) {
       <Header />
       <ArtistHero artist={artist} />
       <ArtistBio artist={artist} />
-      <ArtistGallery artist={artist} />
-      <ArtistVideos artist={artist} />
+      <ArtistGalleryCarousel artist={artist} />
+      <ArtistVideoCarousel artist={artist} />
       <ArtistSocials artist={artist} />
       <Footer />
     </>

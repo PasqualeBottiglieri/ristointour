@@ -11,10 +11,17 @@ export interface GooglePlaceSearchResult {
   businessStatus?: string;
 }
 
+export interface GooglePlacePhoto {
+  url: string;
+  widthPx: number;
+  heightPx: number;
+}
+
 export interface GooglePlaceDetails {
   placeId: string;
   name: string;
   address: string;
+  description?: string;
   phone?: string;
   website?: string;
   rating?: number;
@@ -26,6 +33,7 @@ export interface GooglePlaceDetails {
   latitude?: number;
   longitude?: number;
   googleMapsUrl?: string;
+  photos?: GooglePlacePhoto[];
 }
 
 const TYPE_TO_CATEGORY: Record<string, string> = {
