@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contatti | Ristointour",
@@ -103,58 +104,7 @@ export default function ContattiPage() {
             {/* Contact form */}
             <div>
               <h2 className="text-2xl font-black mb-6">Scrivici un messaggio</h2>
-              <form className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-stone-500 uppercase tracking-widest ml-1 font-display">
-                      Nome
-                    </label>
-                    <input
-                      className="w-full rounded-xl border border-stone-200 px-4 h-12 focus:border-primary focus:ring-primary font-display"
-                      type="text"
-                      placeholder="Il tuo nome"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-stone-500 uppercase tracking-widest ml-1 font-display">
-                      Email
-                    </label>
-                    <input
-                      className="w-full rounded-xl border border-stone-200 px-4 h-12 focus:border-primary focus:ring-primary font-display"
-                      type="email"
-                      placeholder="La tua email"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-stone-500 uppercase tracking-widest ml-1 font-display">
-                    Oggetto
-                  </label>
-                  <select className="w-full rounded-xl border border-stone-200 px-4 h-12 focus:border-primary focus:ring-primary font-display text-stone-600">
-                    <option>Informazioni generali</option>
-                    <option>Inserire la mia attività</option>
-                    <option>Proporre una collaborazione</option>
-                    <option>Segnalare un problema</option>
-                    <option>Altro</option>
-                  </select>
-                </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-stone-500 uppercase tracking-widest ml-1 font-display">
-                    Messaggio
-                  </label>
-                  <textarea
-                    className="w-full rounded-xl border border-stone-200 px-4 py-3 focus:border-primary focus:ring-primary font-display resize-none"
-                    rows={6}
-                    placeholder="Scrivi il tuo messaggio..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/30 transition-all font-display"
-                >
-                  Invia Messaggio
-                </button>
-              </form>
+              <ContactForm />
             </div>
           </div>
         </div>
