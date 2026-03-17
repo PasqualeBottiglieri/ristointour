@@ -11,6 +11,66 @@ function extractVideoId(embedUrl: string): string | null {
   return match ? match[1] : null;
 }
 
+function isLocalVideo(url: string): boolean {
+  return /\.(mp4|webm|mov)$/i.test(url);
+}
+
+function VideoPlayer({ video }: { video: ArtistVideo; className?: string }) {
+  if (isLocalVideo(video.url)) {
+    return (
+      <video
+        key={video.url}
+        src={video.url}
+        controls
+        preload="metadata"
+        className="w-full h-full object-contain bg-stone-900"
+      />
+    );
+  }
+  return (
+    <iframe
+      key={video.url}
+      src={video.url}
+      title={video.title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="w-full h-full"
+    />
+  );
+}
+
+function VideoThumbnail({ video }: { video: ArtistVideo }) {
+  if (isLocalVideo(video.url)) {
+    return (
+      <video
+        src={video.url}
+        muted
+        preload="metadata"
+        className="w-full h-full object-cover"
+      />
+    );
+  }
+  const videoId = extractVideoId(video.url);
+  if (videoId) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
+        alt=""
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    );
+  }
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-stone-800">
+      <span className="material-symbols-outlined text-3xl text-white/60">
+        play_circle
+      </span>
+    </div>
+  );
+}
+
 export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
   const videos = jsonArray<ArtistVideo>(artist.videoEmbeds);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,6 +81,7 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
   if (total === 0) return null;
 
   const activeVideo = videos[activeIndex];
+  const activeIsLocal = isLocalVideo(activeVideo.url);
 
   const selectVideo = useCallback(
     (index: number) => {
@@ -40,7 +101,7 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
     }
   }, [activeIndex, total]);
 
-  // Single video — no carousel, just premium presentation
+  // Single video — no carousel
   if (total === 1) {
     return (
       <section className="py-20 md:py-28">
@@ -55,13 +116,7 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video rounded-2xl overflow-hidden shadow-lg shadow-stone-900/5 bg-stone-900">
-              <iframe
-                src={activeVideo.url}
-                title={activeVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
+              <VideoPlayer video={activeVideo} />
             </div>
             {activeVideo.title && (
               <p className="mt-4 text-center text-stone-600 font-display font-medium">
@@ -95,21 +150,25 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
         {/* Featured video */}
         <div className="max-w-4xl mx-auto mb-6">
           <div className="aspect-video rounded-2xl overflow-hidden shadow-lg shadow-stone-900/5 bg-stone-900 relative">
-            {/* Loading state */}
-            {!iframeLoaded && (
+            {/* Loading state (only for iframes) */}
+            {!activeIsLocal && !iframeLoaded && (
               <div className="absolute inset-0 flex items-center justify-center bg-stone-900">
                 <div className="w-12 h-12 rounded-full border-2 border-white/20 border-t-white/80 animate-spin" />
               </div>
             )}
-            <iframe
-              key={activeVideo.url}
-              src={activeVideo.url}
-              title={activeVideo.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              onLoad={() => setIframeLoaded(true)}
-              className={`w-full h-full transition-opacity duration-300 ${iframeLoaded ? "opacity-100" : "opacity-0"}`}
-            />
+            {activeIsLocal ? (
+              <VideoPlayer video={activeVideo} />
+            ) : (
+              <iframe
+                key={activeVideo.url}
+                src={activeVideo.url}
+                title={activeVideo.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                onLoad={() => setIframeLoaded(true)}
+                className={`w-full h-full transition-opacity duration-300 ${iframeLoaded ? "opacity-100" : "opacity-0"}`}
+              />
+            )}
           </div>
           {activeVideo.title && (
             <p className="mt-4 text-center text-stone-600 font-display font-medium text-lg truncate max-w-2xl mx-auto" title={activeVideo.title}>
@@ -126,7 +185,6 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
           aria-label="Seleziona video"
         >
           {videos.map((video, i) => {
-            const videoId = extractVideoId(video.url);
             const isActive = i === activeIndex;
             return (
               <button
@@ -142,21 +200,7 @@ export default function ArtistVideoCarousel({ artist }: { artist: Artist }) {
                 }`}
               >
                 <div className="w-full aspect-video bg-stone-200 relative">
-                  {videoId ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
-                      alt=""
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-stone-800">
-                      <span className="material-symbols-outlined text-3xl text-white/60">
-                        play_circle
-                      </span>
-                    </div>
-                  )}
+                  <VideoThumbnail video={video} />
                   {/* Play icon overlay */}
                   <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${isActive ? "opacity-0" : "opacity-100 group-hover:opacity-100"}`}>
                     <div className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">

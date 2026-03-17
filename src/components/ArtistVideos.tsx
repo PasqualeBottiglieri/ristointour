@@ -1,6 +1,10 @@
 import type { Artist, ArtistVideo } from "@/lib/types";
 import { jsonArray } from "@/lib/types";
 
+function isLocalVideo(url: string): boolean {
+  return /\.(mp4|webm|mov)$/i.test(url);
+}
+
 export default function ArtistVideos({ artist }: { artist: Artist }) {
   const videos = jsonArray<ArtistVideo>(artist.videoEmbeds);
   if (videos.length === 0) return null;
@@ -13,13 +17,22 @@ export default function ArtistVideos({ artist }: { artist: Artist }) {
           {videos.map((video, i) => (
             <div key={i}>
               <div className="aspect-video rounded-xl overflow-hidden bg-stone-200">
-                <iframe
-                  src={video.url}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
+                {isLocalVideo(video.url) ? (
+                  <video
+                    src={video.url}
+                    controls
+                    preload="metadata"
+                    className="w-full h-full object-contain bg-stone-900"
+                  />
+                ) : (
+                  <iframe
+                    src={video.url}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                )}
               </div>
               <h3 className="mt-3 font-bold font-display">{video.title}</h3>
             </div>

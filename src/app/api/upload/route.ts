@@ -4,24 +4,38 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
 
+export const maxDuration = 60;
+
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "fallback-secret-change-me"
 );
 
-const ALLOWED_TYPES = new Set([
+const IMAGE_TYPES = new Set([
   "image/jpeg",
   "image/png",
   "image/webp",
   "image/gif",
 ]);
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const VIDEO_TYPES = new Set([
+  "video/mp4",
+  "video/webm",
+  "video/quicktime",
+]);
+
+const ALLOWED_TYPES = new Set([...IMAGE_TYPES, ...VIDEO_TYPES]);
+
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
 
 const EXT_MAP: Record<string, string> = {
   "image/jpeg": ".jpg",
   "image/png": ".png",
   "image/webp": ".webp",
   "image/gif": ".gif",
+  "video/mp4": ".mp4",
+  "video/webm": ".webm",
+  "video/quicktime": ".mov",
 };
 
 export async function POST(request: NextRequest) {
@@ -51,13 +65,15 @@ export async function POST(request: NextRequest) {
   for (const file of files) {
     if (!ALLOWED_TYPES.has(file.type)) {
       return NextResponse.json(
-        { error: `Tipo non supportato: ${file.type}. Usa JPG, PNG, WebP o GIF.` },
+        { error: `Tipo non supportato: ${file.type}. Usa JPG, PNG, WebP, GIF, MP4, WebM o MOV.` },
         { status: 400 }
       );
     }
-    if (file.size > MAX_SIZE) {
+    const maxSize = VIDEO_TYPES.has(file.type) ? MAX_VIDEO_SIZE : MAX_IMAGE_SIZE;
+    const maxLabel = VIDEO_TYPES.has(file.type) ? "100MB" : "5MB";
+    if (file.size > maxSize) {
       return NextResponse.json(
-        { error: `File troppo grande: ${file.name}. Massimo 5MB.` },
+        { error: `File troppo grande: ${file.name}. Massimo ${maxLabel}.` },
         { status: 400 }
       );
     }
