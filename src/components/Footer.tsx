@@ -109,7 +109,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-500 text-[10px] uppercase tracking-widest font-display">
-          <p>&copy; 2025 Ristointour. All rights reserved.</p>
+          <p>&copy; 2026 Ristointour. All rights reserved.</p>
           <div className="flex gap-6">
             <a className="hover:text-white" href="#">
               Privacy Policy
