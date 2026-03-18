@@ -12,7 +12,12 @@ export const metadata: Metadata = {
     "Scopri i migliori artisti e musicisti per il tuo evento nella Piana del Sele. Jazz, musica napoletana, DJ set e molto altro.",
 };
 
-export default async function ArtistiPage() {
+export default async function ArtistiPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
   const artists = await getPublishedArtists();
   const { genres, locations, eventTypes } = extractArtistFilterOptions(artists);
 
@@ -35,6 +40,7 @@ export default async function ArtistiPage() {
             genres={genres}
             locations={locations}
             eventTypes={eventTypes}
+            initialLocation={location}
           />
         </div>
       </section>

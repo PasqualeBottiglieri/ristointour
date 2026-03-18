@@ -12,11 +12,12 @@ interface ArtistGridProps {
   genres: string[];
   locations: string[];
   eventTypes: string[];
+  initialLocation?: string;
 }
 
-export default function ArtistGrid({ artists, genres, locations, eventTypes }: ArtistGridProps) {
+export default function ArtistGrid({ artists, genres, locations, eventTypes, initialLocation }: ArtistGridProps) {
   const [genre, setGenre] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(initialLocation || "");
   const [eventType, setEventType] = useState("");
 
   const filtered = useMemo(() => {

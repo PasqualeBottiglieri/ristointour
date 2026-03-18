@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Scopri le migliori cantine della Piana del Sele. Vini autoctoni, degustazioni e visite guidate nei vigneti del Cilento.",
 };
 
-export default function CantinePage() {
+export default async function CantinePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
+
   return (
     <>
       <Header />
@@ -29,6 +35,7 @@ export default function CantinePage() {
           </div>
           <BusinessListingGrid
             categories={["cantina"]}
+            location={location}
             emptyIcon="wine_bar"
             emptyLabel="Nessuna cantina trovata"
           />

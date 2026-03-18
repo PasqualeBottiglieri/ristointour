@@ -120,3 +120,13 @@ export const locationOptions = [
   "Salerno",
 ];
 
+export const searchCategories = [
+  { label: "Ristoranti", href: "/ristoranti" },
+  { label: "Pizzerie", href: "/ristoranti" },
+  { label: "Agriturismi", href: "/agriturismi" },
+  { label: "Caseifici", href: "/caseifici" },
+  { label: "Cantine", href: "/cantine" },
+  { label: "Pasticcerie", href: "/pasticcerie" },
+  { label: "Artisti", href: "/artisti" },
+];
+

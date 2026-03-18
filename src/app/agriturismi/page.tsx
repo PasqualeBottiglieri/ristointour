@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Scopri i migliori agriturismi della Piana del Sele. Ospitalità rurale, cucina contadina e prodotti a km zero.",
 };
 
-export default function AgriturismiPage() {
+export default async function AgriturismiPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
+
   return (
     <>
       <Header />
@@ -28,6 +34,7 @@ export default function AgriturismiPage() {
           </div>
           <BusinessListingGrid
             categories={["agriturismo"]}
+            location={location}
             emptyIcon="agriculture"
             emptyLabel="Nessun agriturismo trovato"
           />

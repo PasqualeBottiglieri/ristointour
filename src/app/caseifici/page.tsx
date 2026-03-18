@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "I migliori caseifici artigianali della Piana del Sele. Mozzarella di Bufala Campana DOP, ricotta e formaggi tipici.",
 };
 
-export default function CaseificiPage() {
+export default async function CaseificiPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
+
   return (
     <>
       <Header />
@@ -28,6 +34,7 @@ export default function CaseificiPage() {
           </div>
           <BusinessListingGrid
             categories={["caseificio"]}
+            location={location}
             emptyIcon="flatware"
             emptyLabel="Nessun caseificio trovato"
           />

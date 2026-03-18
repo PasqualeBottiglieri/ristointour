@@ -21,7 +21,9 @@ const platformIcons: Record<string, string> = {
 
 export default function ArtistSocials({ artist }: { artist: Artist }) {
   const socials = jsonArray<ArtistSocial>(artist.socialLinks);
-  if (socials.length === 0) return null;
+  const hasContact = artist.phone || artist.website;
+
+  if (socials.length === 0 && !hasContact) return null;
 
   return (
     <section className="py-20 md:py-28 bg-stone-50">
@@ -32,22 +34,53 @@ export default function ArtistSocials({ artist }: { artist: Artist }) {
         <h2 className="text-3xl md:text-4xl font-black mb-10 text-stone-900">
           Segui {artist.name}
         </h2>
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
-          {socials.map((social) => (
-            <a
-              key={social.platform}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 md:px-6 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 font-display font-bold text-sm border border-stone-100"
-            >
-              <span className="material-symbols-outlined text-lg text-stone-500">
-                {platformIcons[social.platform] || "link"}
-              </span>
-              {platformLabels[social.platform] || social.platform}
-            </a>
-          ))}
-        </div>
+
+        {/* Direct contact buttons */}
+        {hasContact && (
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
+            {artist.phone && (
+              <a
+                href={`tel:${artist.phone}`}
+                className="flex items-center gap-2 px-5 md:px-6 py-3 bg-primary text-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 font-display font-bold text-sm"
+              >
+                <span className="material-symbols-outlined text-lg">call</span>
+                {artist.phone}
+              </a>
+            )}
+            {artist.website && (
+              <a
+                href={artist.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 md:px-6 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 font-display font-bold text-sm border border-stone-100"
+              >
+                <span className="material-symbols-outlined text-lg text-stone-500">language</span>
+                Sito Web
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* Social links */}
+        {socials.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
+            {socials.map((social) => (
+              <a
+                key={social.platform}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 md:px-6 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 font-display font-bold text-sm border border-stone-100"
+              >
+                <span className="material-symbols-outlined text-lg text-stone-500">
+                  {platformIcons[social.platform] || "link"}
+                </span>
+                {platformLabels[social.platform] || social.platform}
+              </a>
+            ))}
+          </div>
+        )}
+
         <a
           href="/contatti"
           className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-900 text-white font-bold uppercase tracking-widest text-xs rounded-lg hover:bg-emerald-950 transition-colors font-display"

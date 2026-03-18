@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Scopri i migliori ristoranti e pizzerie della Piana del Sele. Cucina tradizionale, fine dining e specialità locali.",
 };
 
-export default function RistorantiPage() {
+export default async function RistorantiPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
+
   return (
     <>
       <Header />
@@ -28,6 +34,7 @@ export default function RistorantiPage() {
           </div>
           <BusinessListingGrid
             categories={["ristorante", "pizzeria"]}
+            location={location}
             emptyIcon="restaurant"
             emptyLabel="Nessun ristorante trovato"
           />

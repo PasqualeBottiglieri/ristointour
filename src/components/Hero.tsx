@@ -1,6 +1,23 @@
-import { heroImage, locationOptions } from "@/data/content";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { heroImage, locationOptions, searchCategories } from "@/data/content";
 
 export default function Hero() {
+  const router = useRouter();
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+
+  function handleSearch() {
+    const selected = searchCategories.find((c) => c.label === category);
+    if (!selected) return;
+    const url = location
+      ? `${selected.href}?location=${encodeURIComponent(location)}`
+      : selected.href;
+    router.push(url);
+  }
+
   return (
     <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-black/40 z-10" />
@@ -24,37 +41,40 @@ export default function Hero() {
             <label className="block text-[10px] uppercase tracking-tighter text-stone-400 font-bold">
               Cosa cerchi?
             </label>
-            <input
-              className="hidden md:block w-full border-none focus:ring-0 p-0 text-emerald-900 placeholder:text-stone-300 bg-transparent font-display text-sm"
-              placeholder="Ristoranti, esperienze..."
-              type="text"
-            />
-            <select className="md:hidden w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm">
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm appearance-none cursor-pointer"
+            >
               <option value="">Ristoranti, esperienze...</option>
-              <option>Ristoranti</option>
-              <option>Pizzerie</option>
-              <option>Agriturismi</option>
-              <option>Caseifici</option>
-              <option>Cantine</option>
-              <option>Pasticcerie</option>
+              {searchCategories.map((c) => (
+                <option key={c.label} value={c.label}>
+                  {c.label}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex-1 px-4 md:px-6 py-2 text-left">
             <label className="block text-[10px] uppercase tracking-tighter text-stone-400 font-bold">
               Dove?
             </label>
-            <input
-              className="hidden md:block w-full border-none focus:ring-0 p-0 text-emerald-900 placeholder:text-stone-300 bg-transparent font-display text-sm"
-              placeholder="Paestum, Eboli, Salerno"
-              type="text"
-            />
-            <select className="md:hidden w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm">
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full border-none focus:ring-0 p-0 text-emerald-900 bg-transparent font-display text-sm appearance-none cursor-pointer"
+            >
+              <option value="">Tutte le zone</option>
               {locationOptions.map((loc) => (
-                <option key={loc}>{loc}</option>
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
               ))}
             </select>
           </div>
-          <button className="bg-primary hover:bg-orange-600 text-white px-8 py-4 rounded-xl md:rounded-full font-bold transition-all shadow-lg flex items-center gap-2 justify-center font-display text-sm">
+          <button
+            onClick={handleSearch}
+            className="bg-primary hover:bg-orange-600 text-white px-8 py-4 rounded-xl md:rounded-full font-bold transition-all shadow-lg flex items-center gap-2 justify-center font-display text-sm"
+          >
             <span className="material-symbols-outlined text-sm">search</span>{" "}
             Cerca
           </button>

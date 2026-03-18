@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Le migliori pasticcerie artigianali della Piana del Sele. Sfogliatelle, delizie al limone e dolci della tradizione campana.",
 };
 
-export default function PasticceriePage() {
+export default async function PasticceriePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>;
+}) {
+  const { location } = await searchParams;
+
   return (
     <>
       <Header />
@@ -28,6 +34,7 @@ export default function PasticceriePage() {
           </div>
           <BusinessListingGrid
             categories={["pasticceria"]}
+            location={location}
             emptyIcon="bakery_dining"
             emptyLabel="Nessuna pasticceria trovata"
           />

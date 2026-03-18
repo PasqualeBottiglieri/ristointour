@@ -5,12 +5,16 @@ import { parseGenres } from "./types";
 // ── Listing queries ─────────────────────────────────────────────────
 
 export async function getPublishedListings(
-  categories?: string[]
+  categories?: string[],
+  location?: string
 ): Promise<Listing[]> {
   return prisma.listing.findMany({
     where: {
       status: "published",
       ...(categories ? { category: { in: categories } } : {}),
+      ...(location
+        ? { location: { contains: location, mode: "insensitive" } }
+        : {}),
     },
     orderBy: { displayPriority: "asc" },
   });
