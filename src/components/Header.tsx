@@ -18,7 +18,7 @@ export default function Header() {
           <div className="flex justify-between items-center h-16 sm:h-20">
             {/* Left Sponsor */}
             <div className="flex items-center w-20 sm:w-28 lg:w-32">
-              <a href="https://www.facebook.com/profile.php?id=100010963008639" title="Hokelsoul Spettacoli" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/profile.php?id=61574524102485" title="Hokelsoul Spettacoli" target="_blank" rel="noopener noreferrer">
                 <Image
                   src="/img/hokelsoul.webp"
                   alt="Hokelsoul Spettacoli"
