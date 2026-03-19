@@ -38,6 +38,9 @@ export const metadata: Metadata = {
     description:
       "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele.",
   },
+  verification: {
+    google: "aQWcgswcyegjvIJ7ligfh76Lf_ZaqAjjfcPFGxegZRk",
+  },
 };
 
 export default function RootLayout({
