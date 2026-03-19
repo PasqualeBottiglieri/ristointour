@@ -9,8 +9,9 @@ import ArtistBio from "@/components/ArtistBio";
 import ArtistGalleryCarousel from "@/components/ArtistGalleryCarousel";
 import ArtistVideoCarousel from "@/components/ArtistVideoCarousel";
 import ArtistSocials from "@/components/ArtistSocials";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -19,10 +20,10 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const artist = await getArtistBySlug(slug);
-  if (!artist) return { title: "Artista non trovato | Ristointour" };
+  if (!artist) return { title: "Artista non trovato" };
 
   return {
-    title: `${artist.name} - ${parseGenres(artist.genre).join(", ")} | Ristointour`,
+    title: `${artist.name} - ${parseGenres(artist.genre).join(", ")}`,
     description: artist.shortDescription,
   };
 }
@@ -35,6 +36,13 @@ export default async function ArtistPage({ params }: PageProps) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Artisti", href: "/artisti" },
+          { name: artist.name, href: `/artisti/${artist.slug}` },
+        ]}
+      />
       <Header />
       <ArtistHero artist={artist} />
       <ArtistBio artist={artist} />

@@ -5,10 +5,10 @@ import Footer from "@/components/Footer";
 import SponsorCard from "@/components/SponsorCard";
 import { getPublishedSponsors } from "@/lib/queries";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "I Nostri Partner | Ristointour",
+  title: "I Nostri Partner",
   description:
     "Scopri i partner e sponsor che rendono possibile il progetto Ristointour nella Piana del Sele.",
 };

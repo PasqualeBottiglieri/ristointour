@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contatti | Ristointour",
+  title: "Contatti",
   description:
     "Contatta Ristointour per informazioni, partnership o per inserire la tua attività nel portale.",
 };

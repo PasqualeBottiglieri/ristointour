@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CategoryGrid from "@/components/CategoryGrid";
@@ -10,7 +11,16 @@ import MapSection from "@/components/MapSection";
 import HomepagePartners from "@/components/HomepagePartners";
 import Footer from "@/components/Footer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Ristointour | Ristoranti, Agriturismi e Caseifici nella Piana del Sele",
+  description:
+    "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
+  alternates: {
+    canonical: "https://www.ristointour.com",
+  },
+};
 
 export default function Home() {
   return (

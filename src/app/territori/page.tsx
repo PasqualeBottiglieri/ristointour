@@ -15,7 +15,7 @@ const territoryDescriptions: Record<string, string> = {
 };
 
 export const metadata: Metadata = {
-  title: "I Nostri Territori | Ristointour",
+  title: "I Nostri Territori",
   description:
     "Esplora i territori della Piana del Sele, Paestum, Eboli e Battipaglia. Gastronomia, cultura e natura nel cuore della Campania.",
 };

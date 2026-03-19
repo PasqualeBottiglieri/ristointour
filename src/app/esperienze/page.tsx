@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { experiences } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Esperienze Gastronomiche | Ristointour",
+  title: "Esperienze Gastronomiche",
   description:
     "Vivi esperienze enogastronomiche uniche nella Piana del Sele. Tour dei caseifici, degustazioni, pranzi in agriturismo e corsi di cucina.",
 };

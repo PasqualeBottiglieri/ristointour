@@ -5,8 +5,9 @@ import { notFound } from "next/navigation";
 import { getSponsorBySlug } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -15,10 +16,10 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const sponsor = await getSponsorBySlug(slug);
-  if (!sponsor) return { title: "Partner non trovato | Ristointour" };
+  if (!sponsor) return { title: "Partner non trovato" };
 
   return {
-    title: `${sponsor.name} | Partner Ristointour`,
+    title: `${sponsor.name} — Partner`,
     description: sponsor.shortDescription,
   };
 }
@@ -31,6 +32,13 @@ export default async function SponsorDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Partner", href: "/partner" },
+          { name: sponsor.name, href: `/partner/${sponsor.slug}` },
+        ]}
+      />
       <Header />
 
       {/* Hero */}

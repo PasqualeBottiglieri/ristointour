@@ -16,9 +16,28 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+  metadataBase: new URL("https://www.ristointour.com"),
+  title: {
+    default: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+    template: "%s | Ristointour",
+  },
   description:
     "Esplora i migliori ristoranti, agriturismi ed esperienze gastronomiche autentiche in Campania.",
+  openGraph: {
+    type: "website",
+    locale: "it_IT",
+    siteName: "Ristointour",
+    title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+    description:
+      "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
+    url: "https://www.ristointour.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+    description:
+      "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele.",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +51,24 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Ristointour",
+              url: "https://www.ristointour.com",
+              description:
+                "Guida ai migliori ristoranti, agriturismi, caseifici ed esperienze gastronomiche nella Piana del Sele, Campania.",
+              areaServed: {
+                "@type": "Place",
+                name: "Piana del Sele, Campania, Italia",
+              },
+              sameAs: [],
+            }),
+          }}
         />
       </head>
       <body
