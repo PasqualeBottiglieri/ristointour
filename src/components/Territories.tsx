@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { territories } from "@/data/content";
 
 export default function Territories() {
@@ -7,10 +8,10 @@ export default function Territories() {
         <h2 className="text-4xl font-black mb-12">I Nostri Territori</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {territories.map((t) => (
-            <a
+            <Link
               key={t.name}
               className="group relative h-96 rounded-2xl overflow-hidden"
-              href="#"
+              href={`/territori/${t.slug}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -22,7 +23,7 @@ export default function Territories() {
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <h3 className="text-2xl font-black text-white">{t.name}</h3>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

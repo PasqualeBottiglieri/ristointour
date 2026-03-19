@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { territories } from "@/data/content";
@@ -38,9 +39,10 @@ export default function TerritoriPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {territories.map((t) => (
-              <div
+              <Link
                 key={t.name}
-                className="group relative rounded-2xl overflow-hidden"
+                href={`/territori/${t.slug}`}
+                className="group relative rounded-2xl overflow-hidden block"
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -59,7 +61,7 @@ export default function TerritoriPage() {
                     {territoryDescriptions[t.name] ?? ""}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
