@@ -5,7 +5,7 @@ import {
   getSponsorDetailSlugs,
 } from "@/lib/queries";
 
-const BASE_URL = "https://www.ristointour.com";
+const BASE_URL = "https://www.ristointour.it";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes

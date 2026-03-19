@@ -53,7 +53,7 @@ export default async function ArtistiPage({
         description: a.shortDescription,
         image: a.image,
         ...(a.hasDetailPage
-          ? { url: `https://www.ristointour.com/artisti/${a.slug}` }
+          ? { url: `https://www.ristointour.it/artisti/${a.slug}` }
           : {}),
       },
     })),

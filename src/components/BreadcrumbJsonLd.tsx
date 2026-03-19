@@ -11,7 +11,7 @@ export default function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] })
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `https://www.ristointour.com${item.href}`,
+      item: `https://www.ristointour.it${item.href}`,
     })),
   };
 

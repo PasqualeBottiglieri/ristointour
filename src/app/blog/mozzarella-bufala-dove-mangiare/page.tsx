@@ -39,7 +39,7 @@ export default async function MozzarellaBufalaDoveMangiare() {
     publisher: {
       "@type": "Organization",
       name: "Ristointour",
-      url: "https://www.ristointour.com",
+      url: "https://www.ristointour.it",
     },
     datePublished: "2026-03-01",
     dateModified: new Date().toISOString().split("T")[0],

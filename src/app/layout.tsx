@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ristointour.com"),
+  metadataBase: new URL("https://www.ristointour.it"),
   title: {
     default: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
     template: "%s | Ristointour",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
     description:
       "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
-    url: "https://www.ristointour.com",
+    url: "https://www.ristointour.it",
   },
   twitter: {
     card: "summary_large_image",
@@ -59,7 +59,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Ristointour",
-              url: "https://www.ristointour.com",
+              url: "https://www.ristointour.it",
               description:
                 "Guida ai migliori ristoranti, agriturismi, caseifici ed esperienze gastronomiche nella Piana del Sele, Campania.",
               areaServed: {

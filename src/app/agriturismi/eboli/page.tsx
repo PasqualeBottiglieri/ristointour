@@ -40,7 +40,7 @@ export default async function AgriturismiEboli() {
           addressCountry: "IT",
         },
         ...(l.hasDetailPage
-          ? { url: `https://www.ristointour.com/ristoranti/${l.slug}` }
+          ? { url: `https://www.ristointour.it/ristoranti/${l.slug}` }
           : {}),
       },
     })),

@@ -60,7 +60,7 @@ function buildRestaurantJsonLd(restaurant: {
     name: restaurant.name,
     description: restaurant.description,
     image: restaurant.image,
-    url: `https://www.ristointour.com/ristoranti/${restaurant.slug}`,
+    url: `https://www.ristointour.it/ristoranti/${restaurant.slug}`,
     address: {
       "@type": "PostalAddress",
       streetAddress: restaurant.address ?? "",

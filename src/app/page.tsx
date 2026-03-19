@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
   alternates: {
-    canonical: "https://www.ristointour.com",
+    canonical: "https://www.ristointour.it",
   },
 };
 
