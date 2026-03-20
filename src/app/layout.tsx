@@ -31,12 +31,34 @@ export const metadata: Metadata = {
     description:
       "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
     url: "https://www.ristointour.it",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ristointour - Eccellenze Gastronomiche della Piana del Sele",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
     description:
       "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele.",
+    images: ["/og-image.jpg"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      {
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   verification: {
     google: "aQWcgswcyegjvIJ7ligfh76Lf_ZaqAjjfcPFGxegZRk",
@@ -64,6 +86,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Ristointour",
               url: "https://www.ristointour.it",
+              logo: "https://www.ristointour.it/android-chrome-512x512.png",
               description:
                 "Guida ai migliori ristoranti, agriturismi, caseifici ed esperienze gastronomiche nella Piana del Sele, Campania.",
               areaServed: {
