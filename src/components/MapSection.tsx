@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { mapImage, mapPins } from "@/data/content";
 
 export default function MapSection() {
@@ -21,9 +22,12 @@ export default function MapSection() {
           <p className="text-stone-500 mb-6 font-display">
             Trova tutte le eccellenze gastronomiche intorno a te.
           </p>
-          <button className="bg-emerald-900 text-white px-8 py-3 rounded-full font-bold font-display">
-            Apri Mappa Interattiva
-          </button>
+          <Link
+            href="/territori"
+            className="bg-emerald-900 text-white px-8 py-3 rounded-full font-bold font-display inline-block"
+          >
+            Esplora i Territori
+          </Link>
         </div>
       </div>
 
