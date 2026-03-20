@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RestaurantCard from "@/components/RestaurantCard";
 import BusinessCardBasic from "@/components/BusinessCardBasic";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getPublishedListings } from "@/lib/queries";
 
 export const revalidate = 60;
@@ -51,7 +51,8 @@ export default async function MozzarellaBufalaDoveMangiare() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Blog", href: "/blog/mozzarella-bufala-dove-mangiare" },
@@ -61,22 +62,11 @@ export default async function MozzarellaBufalaDoveMangiare() {
           },
         ]}
       />
-      <Header />
 
       <article className="py-20">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}
           <header className="mb-16">
-            <nav className="text-sm text-stone-400 font-display mb-4">
-              <Link
-                href="/"
-                className="hover:text-primary transition-colors"
-              >
-                Home
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-stone-600">Guida</span>
-            </nav>
             <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
               Dove Mangiare la Migliore Mozzarella di Bufala nella Piana del
               Sele

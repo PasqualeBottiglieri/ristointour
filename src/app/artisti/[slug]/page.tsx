@@ -9,7 +9,7 @@ import ArtistBio from "@/components/ArtistBio";
 import ArtistGalleryCarousel from "@/components/ArtistGalleryCarousel";
 import ArtistVideoCarousel from "@/components/ArtistVideoCarousel";
 import ArtistSocials from "@/components/ArtistSocials";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const revalidate = 60;
 
@@ -36,14 +36,14 @@ export default async function ArtistPage({ params }: PageProps) {
 
   return (
     <>
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Artisti", href: "/artisti" },
           { name: artist.name, href: `/artisti/${artist.slug}` },
         ]}
       />
-      <Header />
       <ArtistHero artist={artist} />
       <ArtistBio artist={artist} />
       <ArtistGalleryCarousel artist={artist} />

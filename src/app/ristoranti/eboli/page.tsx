@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getPublishedListings } from "@/lib/queries";
 
 export const revalidate = 60;
@@ -55,24 +55,17 @@ export default async function RistorantiEboli() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Ristoranti", href: "/ristoranti" },
           { name: "Eboli", href: "/ristoranti/eboli" },
         ]}
       />
-      <Header />
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-12">
-            <nav className="text-sm text-stone-400 font-display mb-4">
-              <Link href="/ristoranti" className="hover:text-primary transition-colors">
-                Ristoranti
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-stone-600">Eboli</span>
-            </nav>
             <h1 className="text-4xl md:text-5xl font-black mb-4">
               Ristoranti a Eboli
             </h1>

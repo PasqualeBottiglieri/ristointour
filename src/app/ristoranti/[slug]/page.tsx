@@ -13,7 +13,7 @@ import RestaurantReviews from "@/components/RestaurantReviews";
 import RestaurantBooking from "@/components/RestaurantBooking";
 import RestaurantSimilar from "@/components/RestaurantSimilar";
 import MobileBookingButton from "@/components/MobileBookingButton";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const revalidate = 60;
 
@@ -115,14 +115,14 @@ export default async function RestaurantPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Ristoranti", href: "/ristoranti" },
           { name: restaurant.name, href: `/ristoranti/${restaurant.slug}` },
         ]}
       />
-      <Header />
       <main className="max-w-7xl mx-auto px-4 py-6 space-y-8">
         <RestaurantHero restaurant={restaurant} />
         <RestaurantInfoBar restaurant={restaurant} />

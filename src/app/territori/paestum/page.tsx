@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import FaqSection, { buildFaqJsonLd } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
@@ -40,26 +40,19 @@ export default function PaestumTerritoryPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Territori", href: "/territori" },
           { name: "Paestum", href: "/territori/paestum" },
         ]}
       />
-      <Header />
 
       <article className="py-20">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}
           <header className="mb-16">
-            <nav className="text-sm text-stone-400 font-display mb-4">
-              <Link href="/territori" className="hover:text-primary transition-colors">
-                Territori
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-stone-600">Paestum</span>
-            </nav>
             <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
               Paestum — Tra Templi Greci e Sapori della Piana del Sele
             </h1>

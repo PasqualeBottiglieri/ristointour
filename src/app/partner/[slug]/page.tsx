@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getSponsorBySlug } from "@/lib/queries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const revalidate = 60;
 
@@ -32,14 +32,14 @@ export default async function SponsorDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Partner", href: "/partner" },
           { name: sponsor.name, href: `/partner/${sponsor.slug}` },
         ]}
       />
-      <Header />
 
       {/* Hero */}
       <section className="relative bg-emerald-950 text-white">

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getPublishedListings } from "@/lib/queries";
 
 export const revalidate = 60;
@@ -52,24 +52,17 @@ export default async function CaseificiBattipaglia() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbJsonLd
+      <Header />
+      <Breadcrumb
         items={[
           { name: "Home", href: "/" },
           { name: "Caseifici", href: "/caseifici" },
           { name: "Battipaglia", href: "/caseifici/battipaglia" },
         ]}
       />
-      <Header />
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-12">
-            <nav className="text-sm text-stone-400 font-display mb-4">
-              <Link href="/caseifici" className="hover:text-primary transition-colors">
-                Caseifici
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-stone-600">Battipaglia</span>
-            </nav>
             <h1 className="text-4xl md:text-5xl font-black mb-4">
               Caseifici a Battipaglia
             </h1>
