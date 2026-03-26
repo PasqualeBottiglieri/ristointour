@@ -131,7 +131,18 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4 text-stone-500 text-[10px] uppercase tracking-widest font-display">
-          <p>&copy; 2026 Ristointour. All rights reserved.</p>
+          <p>&copy; 2026 Associazione Culturale COMUNICARE — P.IVA 05584260656</p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/cookie-policy" className="hover:text-white transition-colors">
+              Cookie Policy
+            </Link>
+            <Link href="/termini-condizioni" className="hover:text-white transition-colors">
+              Termini e Condizioni
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
