@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import { sendContactEmail } from "./actions";
 
 export default function ContactForm() {
@@ -126,7 +127,38 @@ export default function ContactForm() {
         />
       </div>
 
-      {state.error && (
+      {/* Privacy consent checkbox */}
+      <div className="space-y-1">
+        <div className="flex items-start gap-3">
+          <input
+            id="contact-privacy"
+            name="privacy"
+            type="checkbox"
+            value="accepted"
+            required
+            aria-required="true"
+            className="mt-1 size-4 shrink-0 rounded border-stone-300 text-primary focus:ring-primary accent-[#F86D16]"
+          />
+          <label htmlFor="contact-privacy" className="text-sm text-stone-600 font-display leading-snug">
+            Ho letto e accetto la{" "}
+            <Link
+              href="/privacy-policy"
+              target="_blank"
+              className="text-[#F86D16] underline hover:text-[#e05e0d]"
+            >
+              Privacy Policy
+            </Link>{" "}
+            *
+          </label>
+        </div>
+        {state.error === "Devi accettare la Privacy Policy per procedere." && (
+          <p className="text-red-600 text-xs font-display ml-7">
+            {state.error}
+          </p>
+        )}
+      </div>
+
+      {state.error && state.error !== "Devi accettare la Privacy Policy per procedere." && (
         <div className="flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-display">
           <span className="material-symbols-outlined text-red-500 shrink-0">
             error

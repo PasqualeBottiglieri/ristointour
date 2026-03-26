@@ -36,6 +36,15 @@ export async function sendContactEmail(
     return { success: false, error: "Il messaggio non può essere vuoto." };
   }
 
+  const privacy = formData.get("privacy");
+  if (privacy !== "accepted") {
+    return {
+      success: false,
+      error: "Devi accettare la Privacy Policy per procedere.",
+    };
+  }
+  const consentTimestamp = new Date().toISOString();
+
   const toEmailRaw = process.env.CONTACT_FORM_TO_EMAIL;
   const apiKey = process.env.RESEND_API_KEY;
 
@@ -88,7 +97,7 @@ export async function sendContactEmail(
       </tr>
     </table>
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e7e5e4; color: #a8a29e; font-size: 12px;">
-      Pagina origine: /contatti &middot; Inviato il ${escapeHtml(now)}
+      Consenso privacy: ${escapeHtml(consentTimestamp)} &middot; Pagina origine: /contatti &middot; Inviato il ${escapeHtml(now)}
     </div>
   </div>
 </div>`;
