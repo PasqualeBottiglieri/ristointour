@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { experiences } from "@/data/content";
@@ -7,6 +8,9 @@ export const metadata: Metadata = {
   title: "Esperienze Gastronomiche",
   description:
     "Vivi esperienze enogastronomiche uniche nella Piana del Sele. Tour dei caseifici, degustazioni, pranzi in agriturismo e corsi di cucina.",
+openGraph: {
+  title: "Esperienze Gastronomiche — ristointour.it",
+},
 };
 
 export default function EsperienzePage() {

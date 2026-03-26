@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Informativa sulla privacy di Ristointour.it — Trattamento dei dati personali ai sensi del GDPR e del D.Lgs. 196/2003.",
+openGraph: {
+  title: "Privacy Policy — ristointour.it",
+},
 };
 
 const sections = [

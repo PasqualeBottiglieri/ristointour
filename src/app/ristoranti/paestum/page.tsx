@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori ristoranti e pizzerie a Paestum. Cucina cilentana, pesce fresco, fine dining e trattorie tipiche vicino ai Templi e al mare.",
   alternates: { canonical: "/ristoranti/paestum" },
+  ...ogMeta("Ristoranti a Paestum — ristointour.it"),
 };
 
 export default async function RistorantiPaestum() {

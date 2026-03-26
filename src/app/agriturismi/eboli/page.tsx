@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori agriturismi a Eboli. Cucina contadina, prodotti biologici a km zero, fattorie didattiche e relax nella campagna della Piana del Sele.",
   alternates: { canonical: "/agriturismi/eboli" },
+  ...ogMeta("Agriturismi a Eboli — ristointour.it"),
 };
 
 export default async function AgriturismiEboli() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori ristoranti e pizzerie della Piana del Sele. Cucina tradizionale, fine dining e specialità locali a Battipaglia, Eboli, Paestum.",
   alternates: { canonical: "/ristoranti" },
+  ...ogMeta("Ristoranti nella Piana del Sele — ristointour.it"),
 };
 
 export default async function RistorantiPage({

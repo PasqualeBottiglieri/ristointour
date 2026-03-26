@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "Le migliori pasticcerie artigianali della Piana del Sele. Sfogliatelle, delizie al limone e dolci della tradizione campana a Salerno e Battipaglia.",
   alternates: { canonical: "/pasticcerie" },
+  ...ogMeta("Pasticcerie nella Piana del Sele — ristointour.it"),
 };
 
 export default async function PasticceriePage({

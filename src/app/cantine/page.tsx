@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "Scopri le migliori cantine della Piana del Sele. Vini autoctoni, degustazioni e visite guidate nei vigneti del Cilento e Campania.",
   alternates: { canonical: "/cantine" },
+  ...ogMeta("Cantine nella Piana del Sele — ristointour.it"),
 };
 
 export default async function CantinePage({

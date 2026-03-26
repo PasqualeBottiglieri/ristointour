@@ -28,26 +28,31 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "it_IT",
-    siteName: "Ristointour",
-    title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+    siteName: "ristointour.it",
+    title: "ristointour.it — Scopri le eccellenze della Piana del Sele",
     description:
-      "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele. Guida gastronomica a Battipaglia, Eboli, Paestum e Capaccio.",
+      "Il portale dedicato alla scoperta di ristoranti, agriturismi, caseifici ed esperienze enogastronomiche nella Piana del Sele e nel territorio salernitano.",
     url: "https://www.ristointour.it",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Ristointour - Eccellenze Gastronomiche della Piana del Sele",
+        alt: "ristointour.it — Ristoranti, Agriturismi, Caseifici ed Esperienze nella Piana del Sele",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ristointour | Eccellenze Gastronomiche della Piana del Sele",
+    title: "ristointour.it — Scopri le eccellenze della Piana del Sele",
     description:
-      "Scopri i migliori ristoranti, agriturismi, caseifici e pizzerie nella Piana del Sele.",
-    images: ["/og-image.jpg"],
+      "Il portale dedicato alla scoperta di ristoranti, agriturismi, caseifici ed esperienze enogastronomiche nella Piana del Sele e nel territorio salernitano.",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        alt: "ristointour.it — Ristoranti, Agriturismi, Caseifici ed Esperienze nella Piana del Sele",
+      },
+    ],
   },
   icons: {
     icon: [

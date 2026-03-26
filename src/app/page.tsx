@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CategoryGrid from "@/components/CategoryGrid";
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.ristointour.it",
   },
+  ...ogMeta("ristointour.it — Scopri le eccellenze della Piana del Sele"),
 };
 
 export default function Home() {

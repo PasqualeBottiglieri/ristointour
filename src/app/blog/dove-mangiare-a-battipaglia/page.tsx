@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   description:
     "La guida definitiva su dove mangiare a Battipaglia nel 2026: i migliori ristoranti, pizzerie, caseifici e street food nella capitale della mozzarella di bufala.",
   alternates: { canonical: "/blog/dove-mangiare-a-battipaglia" },
+  ...ogMeta("Dove Mangiare a Battipaglia — ristointour.it"),
 };
 
 export default async function DoveMangiareBattipaglia() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Guida gastronomica a Battipaglia: caseifici, ristoranti, pizzerie e dove mangiare la migliore mozzarella di bufala DOP nella Piana del Sele.",
   alternates: { canonical: "/territori/battipaglia" },
+  ...ogMeta("Battipaglia — ristointour.it"),
 };
 
 const faqs = [

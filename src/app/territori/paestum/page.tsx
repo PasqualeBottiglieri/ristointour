@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Guida a Paestum: i migliori ristoranti, agriturismi e caseifici vicino ai Templi. Cucina cilentana, pesce fresco e mozzarella di bufala nel Patrimonio UNESCO.",
   alternates: { canonical: "/territori/paestum" },
+  ...ogMeta("Paestum — ristointour.it"),
 };
 
 const faqs = [

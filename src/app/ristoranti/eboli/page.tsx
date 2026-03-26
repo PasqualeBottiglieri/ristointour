@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori ristoranti e pizzerie a Eboli. Trattorie tipiche, cucina casalinga, agriturismi e sapori autentici della Piana del Sele.",
   alternates: { canonical: "/ristoranti/eboli" },
+  ...ogMeta("Ristoranti a Eboli — ristointour.it"),
 };
 
 export default async function RistorantiEboli() {

@@ -21,6 +21,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${sponsor.name} — Partner`,
     description: sponsor.shortDescription,
+    openGraph: {
+      title: `${sponsor.name} — ristointour.it`,
+      description: sponsor.shortDescription ?? undefined,
+      images: sponsor.logo
+        ? [{ url: sponsor.logo, width: 512, height: 512, alt: sponsor.name }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+    },
+    twitter: {
+      title: `${sponsor.name} — ristointour.it`,
+      description: sponsor.shortDescription ?? undefined,
+      images: sponsor.logo
+        ? [{ url: sponsor.logo, alt: sponsor.name }]
+        : [{ url: "/images/og-image.jpg", alt: "ristointour.it" }],
+    },
   };
 }
 

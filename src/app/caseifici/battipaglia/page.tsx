@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "I migliori caseifici a Battipaglia: mozzarella di bufala campana DOP fresca, ricotta, burrata e formaggi artigianali. Visite guidate e degustazioni.",
   alternates: { canonical: "/caseifici/battipaglia" },
+  ...ogMeta("Caseifici a Battipaglia — ristointour.it"),
 };
 
 export default async function CaseificiBattipaglia() {

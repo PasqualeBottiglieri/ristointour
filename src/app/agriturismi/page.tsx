@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori agriturismi della Piana del Sele. Ospitalità rurale, cucina contadina e prodotti a km zero a Eboli, Capaccio e Battipaglia.",
   alternates: { canonical: "/agriturismi" },
+  ...ogMeta("Agriturismi nella Piana del Sele — ristointour.it"),
 };
 
 export default async function AgriturismiPage({

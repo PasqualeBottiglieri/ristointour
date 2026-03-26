@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,6 +12,9 @@ export const metadata: Metadata = {
   title: "I Nostri Partner",
   description:
     "Scopri i partner e sponsor che rendono possibile il progetto Ristointour nella Piana del Sele.",
+openGraph: {
+  title: "I Nostri Partner — ristointour.it",
+},
 };
 
 const TYPE_LABELS: Record<string, string> = {

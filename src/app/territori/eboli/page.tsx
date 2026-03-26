@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Guida gastronomica a Eboli: agriturismi, trattorie, cantine e le tradizioni culinarie della porta del Cilento nella Piana del Sele.",
   alternates: { canonical: "/territori/eboli" },
+  ...ogMeta("Eboli — ristointour.it"),
 };
 
 const faqs = [

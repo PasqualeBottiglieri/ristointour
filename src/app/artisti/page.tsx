@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtistGrid from "@/components/ArtistGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori artisti e musicisti per il tuo evento nella Piana del Sele. Jazz, musica napoletana, DJ set per matrimoni e feste.",
   alternates: { canonical: "/artisti" },
+  ...ogMeta("Artisti & Musica — ristointour.it"),
 };
 
 export default async function ArtistiPage({

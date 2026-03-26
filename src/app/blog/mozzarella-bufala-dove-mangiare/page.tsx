@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   description:
     "Guida ai migliori caseifici e ristoranti dove mangiare mozzarella di bufala campana DOP fresca nella Piana del Sele: Battipaglia, Paestum, Eboli e Capaccio.",
   alternates: { canonical: "/blog/mozzarella-bufala-dove-mangiare" },
+  ...ogMeta("Mozzarella di Bufala: Dove Mangiare — ristointour.it"),
 };
 
 export default async function MozzarellaBufalaDoveMangiare() {

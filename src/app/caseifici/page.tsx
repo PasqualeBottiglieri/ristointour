@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BusinessListingGrid from "@/components/BusinessListingGrid";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   description:
     "I migliori caseifici artigianali della Piana del Sele. Mozzarella di Bufala Campana DOP, ricotta e formaggi tipici a Battipaglia e Paestum.",
   alternates: { canonical: "/caseifici" },
+  ...ogMeta("Caseifici nella Piana del Sele — ristointour.it"),
 };
 
 export default async function CaseificiPage({

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Termini e Condizioni",
   description:
     "Termini e condizioni d'uso del portale Ristointour.it — Condizioni generali del servizio.",
+openGraph: {
+  title: "Termini e Condizioni — ristointour.it",
+},
 };
 
 export default function TerminiCondizioniPage() {

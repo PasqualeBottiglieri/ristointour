@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,6 +20,9 @@ export const metadata: Metadata = {
   title: "I Nostri Territori",
   description:
     "Esplora i territori della Piana del Sele, Paestum, Eboli e Battipaglia. Gastronomia, cultura e natura nel cuore della Campania.",
+openGraph: {
+  title: "I Nostri Territori — ristointour.it",
+},
 };
 
 export default function TerritoriPage() {

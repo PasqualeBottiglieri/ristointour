@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Scopri la Piana del Sele: terra di mozzarella di bufala DOP, agriturismi, ristoranti e tradizioni gastronomiche. Guida completa a Battipaglia, Eboli, Paestum e Capaccio.",
   alternates: { canonical: "/territori/piana-del-sele" },
+  ...ogMeta("Piana del Sele — ristointour.it"),
 };
 
 const faqs = [

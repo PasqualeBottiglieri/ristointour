@@ -26,13 +26,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const restaurant = await getListingBySlug(slug);
   if (!restaurant) return { title: "Ristorante non trovato" };
 
+  const title = restaurant.cuisine
+    ? `${restaurant.name} - ${restaurant.cuisine}`
+    : restaurant.name;
+  const description = restaurant.philosophy?.slice(0, 160) ?? restaurant.description;
+
   return {
-    title: restaurant.cuisine
-      ? `${restaurant.name} - ${restaurant.cuisine}`
-      : restaurant.name,
-    description: restaurant.philosophy?.slice(0, 160) ?? restaurant.description,
+    title,
+    description,
     alternates: {
       canonical: `/ristoranti/${restaurant.slug}`,
+    },
+    openGraph: {
+      title: `${restaurant.name} — ristointour.it`,
+      description,
+      images: restaurant.image
+        ? [{ url: restaurant.image, width: 1200, height: 630, alt: restaurant.name }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+    },
+    twitter: {
+      title: `${restaurant.name} — ristointour.it`,
+      description,
+      images: restaurant.image
+        ? [{ url: restaurant.image, alt: restaurant.name }]
+        : [{ url: "/images/og-image.jpg", alt: "ristointour.it" }],
     },
   };
 }

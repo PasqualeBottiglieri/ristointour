@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "./ContactForm";
@@ -7,6 +8,9 @@ export const metadata: Metadata = {
   title: "Contatti",
   description:
     "Contatta Ristointour per informazioni, partnership o per inserire la tua attività nel portale.",
+openGraph: {
+  title: "Contatti — ristointour.it",
+},
 };
 
 export default function ContattiPage() {

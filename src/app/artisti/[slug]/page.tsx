@@ -25,6 +25,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${artist.name} - ${parseGenres(artist.genre).join(", ")}`,
     description: artist.shortDescription,
+    openGraph: {
+      title: `${artist.name} — ristointour.it`,
+      description: artist.shortDescription ?? undefined,
+      images: artist.image
+        ? [{ url: artist.image, width: 1200, height: 630, alt: artist.name }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+    },
+    twitter: {
+      title: `${artist.name} — ristointour.it`,
+      description: artist.shortDescription ?? undefined,
+      images: artist.image
+        ? [{ url: artist.image, alt: artist.name }]
+        : [{ url: "/images/og-image.jpg", alt: "ristointour.it" }],
+    },
   };
 }
 

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
     "Cookie Policy di Ristointour.it — Informazioni sui cookie utilizzati, come gestirli e come revocare il consenso.",
+openGraph: {
+  title: "Cookie Policy — ristointour.it",
+},
 };
 
 export default function CookiePolicyPage() {

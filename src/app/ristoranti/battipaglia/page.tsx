@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMeta } from "@/lib/metadata";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "Scopri i migliori ristoranti e pizzerie a Battipaglia. Cucina tradizionale, pesce, pizza napoletana e specialità bufaline nella Piana del Sele.",
   alternates: { canonical: "/ristoranti/battipaglia" },
+  ...ogMeta("Ristoranti a Battipaglia — ristointour.it"),
 };
 
 export default async function RistorantiBattipaglia() {
