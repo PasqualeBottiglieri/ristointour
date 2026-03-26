@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import CookieBanner from "@/components/CookieBanner";
 import "./globals.css";
 
@@ -104,6 +105,7 @@ export default function RootLayout({
       >
         {children}
         <ScrollToTopButton />
+        <WhatsAppButton />
         <CookieBanner />
       </body>
     </html>
