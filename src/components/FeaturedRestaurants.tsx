@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedListings } from "@/lib/queries";
 
@@ -32,11 +33,12 @@ export default async function FeaturedRestaurants() {
               className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group"
             >
               <div className="h-64 overflow-hidden relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                <Image
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                   src={r.image}
                   alt={r.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 {r.badge && (
                   <div

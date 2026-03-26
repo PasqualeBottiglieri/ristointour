@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
+import Image from "next/image";
 import type { Listing, GalleryImage } from "@/lib/types";
 import { jsonArray } from "@/lib/types";
 
@@ -82,17 +83,18 @@ export default function RestaurantGallery({ restaurant }: { restaurant: Listing 
             {images.map((img, i) => (
               <div
                 key={i}
-                className="w-full h-full flex-shrink-0"
+                className="w-full h-full flex-shrink-0 relative"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Immagine ${i + 1} di ${total}`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={img.src}
                   alt={img.alt || `${restaurant.name} - foto ${i + 1}`}
-                  className="w-full h-full object-contain"
-                  loading={i === 0 ? "eager" : "lazy"}
+                  fill
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  className="object-contain"
+                  priority={i === 0}
                 />
               </div>
             ))}
@@ -141,18 +143,18 @@ export default function RestaurantGallery({ restaurant }: { restaurant: Listing 
               role="tab"
               aria-selected={current === i}
               aria-label={`Vai a immagine ${i + 1}`}
-              className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-stone-200 transition-all duration-300 ${
+              className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-stone-200 transition-all duration-300 ${
                 current === i
                   ? "ring-2 ring-primary ring-offset-2 opacity-100 scale-100"
                   : "opacity-50 hover:opacity-80 scale-95"
               }`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={img.src}
                 alt=""
-                className="w-full h-full object-contain"
-                loading="lazy"
+                fill
+                sizes="80px"
+                className="object-cover"
               />
             </button>
           ))}

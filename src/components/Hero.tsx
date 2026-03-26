@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { heroImage, locationOptions, searchCategories } from "@/data/content";
 
@@ -21,10 +22,16 @@ export default function Hero() {
   return (
     <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-black/40 z-10" />
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
-        style={{ backgroundImage: `url('${heroImage}')` }}
-      />
+      <div className="absolute inset-0 transition-transform duration-1000 hover:scale-105">
+        <Image
+          src={heroImage}
+          alt="Piana del Sele"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
       <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl text-white font-black mb-6 leading-tight">
           Scopri i sapori della <br />

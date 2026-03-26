@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { mapImage, mapPins } from "@/data/content";
 
@@ -5,11 +6,12 @@ export default function MapSection() {
   return (
     <section className="w-full h-[500px] relative">
       <div className="absolute inset-0 bg-stone-200">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="w-full h-full object-cover grayscale opacity-50"
+        <Image
+          className="object-cover grayscale opacity-50"
           src={mapImage}
           alt="Map of the Gulf of Salerno"
+          fill
+          sizes="100vw"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-r from-stone-50 via-transparent to-stone-50 opacity-40" />

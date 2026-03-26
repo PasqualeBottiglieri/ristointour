@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Artist } from "@/lib/types";
 import { jsonArray, parseGenres } from "@/lib/types";
 
@@ -6,11 +7,13 @@ export default function ArtistHero({ artist }: { artist: Artist }) {
 
   return (
     <section className="relative h-[55vh] min-h-[420px] md:h-[60vh] md:min-h-[500px] flex items-end bg-emerald-950">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={artist.image}
         alt={artist.name}
-        className="absolute inset-0 w-full h-full object-contain"
+        fill
+        priority
+        sizes="100vw"
+        className="object-contain"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/95 via-emerald-950/40 to-emerald-950/20" />
       <div className="relative max-w-7xl mx-auto px-4 pb-14 md:pb-16 w-full">

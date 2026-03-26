@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Listing } from "@/lib/types";
 
 export default function BusinessCardBasic({
@@ -8,12 +9,13 @@ export default function BusinessCardBasic({
   return (
     <div className="flex items-center gap-4 bg-white rounded-lg p-4 border border-stone-200 hover:border-stone-300 hover:shadow-sm transition-all duration-300">
       {/* Thumbnail */}
-      <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+      <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 relative">
+        <Image
           src={business.image}
           alt={business.name}
-          className="w-full h-full object-cover"
+          fill
+          sizes="64px"
+          className="object-cover"
         />
       </div>
 

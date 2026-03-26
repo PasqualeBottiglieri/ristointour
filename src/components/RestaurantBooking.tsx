@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Listing } from "@/lib/types";
 
 function displayUrl(url: string): string {
@@ -110,13 +111,16 @@ export default function RestaurantBooking({
         {(restaurant.mapImage || mapsUrl) && (
           <div className="rounded-xl overflow-hidden h-40 relative group">
             {restaurant.mapImage ? (
-              <div
-                className="absolute inset-0 bg-stone-200 flex items-center justify-center grayscale bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('${restaurant.mapImage}')`,
-                }}
-              >
-                <span className="material-symbols-outlined text-primary text-4xl">
+              <div className="absolute inset-0 bg-stone-200 flex items-center justify-center grayscale">
+                <Image
+                  src={restaurant.mapImage}
+                  alt={`Mappa ${restaurant.name}`}
+                  fill
+                  sizes="400px"
+                  className="object-cover"
+                  unoptimized
+                />
+                <span className="material-symbols-outlined text-primary text-4xl relative z-10">
                   location_on
                 </span>
               </div>
