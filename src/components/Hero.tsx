@@ -6,9 +6,10 @@ import { locationOptions, searchCategories } from "@/data/content";
 
 const TOTAL_FRAMES = 240;
 
-function getFrameSrc(index: number): string {
+function getFrameSrc(index: number, portrait: boolean): string {
   const num = String(index).padStart(3, "0");
-  return `/frames/ezgif-frame-${num}.jpg`;
+  const folder = portrait ? "risto_vert" : "risto_or";
+  return `/hero/${folder}/ezgif-frame-${num}.jpg`;
 }
 
 const TEXT_BLOCKS = [
@@ -62,6 +63,18 @@ export default function Hero() {
   const [activeBlock, setActiveBlock] = useState(0);
   const rafRef = useRef<number>(0);
   const currentFrameRef = useRef(0);
+  const [isPortrait, setIsPortrait] = useState(false);
+
+  // Detect orientation
+  useEffect(() => {
+    const mql = window.matchMedia("(orientation: portrait)");
+    setIsPortrait(mql.matches);
+    function onChange(e: MediaQueryListEvent) {
+      setIsPortrait(e.matches);
+    }
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
   function handleSearch() {
     const selected = searchCategories.find((c) => c.label === category);
@@ -102,15 +115,18 @@ export default function Hero() {
     ctx.drawImage(img, 0, 0, srcW, srcH, dx, dy, dw, dh);
   }, []);
 
-  // Preload all frames
+  // Preload all frames (reloads when orientation changes)
   useEffect(() => {
+    setLoaded(false);
+    let cancelled = false;
     let count = 0;
     const images: HTMLImageElement[] = [];
 
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = document.createElement("img");
-      img.src = getFrameSrc(i);
+      img.src = getFrameSrc(i, isPortrait);
       img.onload = () => {
+        if (cancelled) return;
         count++;
         if (count === TOTAL_FRAMES) {
           imagesRef.current = images;
@@ -119,7 +135,11 @@ export default function Hero() {
       };
       images.push(img);
     }
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isPortrait]);
 
   // Draw first frame once loaded
   useEffect(() => {
@@ -184,11 +204,20 @@ export default function Hero() {
         {/* Fallback first frame (before all frames load) */}
         {!loaded && (
           <img
-            src={getFrameSrc(1)}
+            src={getFrameSrc(1, isPortrait)}
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
+
+        {/* Static fallback when JS is disabled */}
+        <noscript>
+          <img
+            src="/hero/risto_or/ezgif-frame-001.jpg"
+            alt="Ristointour hero"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </noscript>
 
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40 z-10" />
