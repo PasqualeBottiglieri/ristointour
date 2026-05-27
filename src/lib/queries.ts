@@ -50,6 +50,14 @@ export async function getListingBySlug(
   });
 }
 
+export async function getListingBySlugPreview(
+  slug: string
+): Promise<Listing | null> {
+  return prisma.listing.findFirst({
+    where: { slug },
+  });
+}
+
 export async function getDetailPageSlugs(): Promise<string[]> {
   const listings = await prisma.listing.findMany({
     where: { status: "published", hasDetailPage: true },

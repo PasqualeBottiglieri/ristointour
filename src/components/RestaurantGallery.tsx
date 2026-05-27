@@ -95,6 +95,7 @@ export default function RestaurantGallery({ restaurant }: { restaurant: Listing 
                   sizes="(max-width: 1280px) 100vw, 1280px"
                   className="object-contain"
                   priority={i === 0}
+                  unoptimized
                 />
               </div>
             ))}
@@ -154,6 +155,7 @@ export default function RestaurantGallery({ restaurant }: { restaurant: Listing 
                 alt=""
                 fill
                 sizes="80px"
+                unoptimized
                 className="object-cover"
               />
             </button>

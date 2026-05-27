@@ -10,6 +10,7 @@ export default function RestaurantHero({ restaurant }: { restaurant: Listing }) 
         fill
         priority
         sizes="100vw"
+        unoptimized
         className="object-contain transition-transform duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />

@@ -12,6 +12,7 @@ export default function RestaurantCard({ restaurant }: { restaurant: Listing }) 
         <Image
           className="object-cover transition-transform duration-700 group-hover:scale-110"
           src={restaurant.image}
+            unoptimized
           alt={restaurant.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"

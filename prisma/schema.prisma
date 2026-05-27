@@ -18,6 +18,7 @@ model Listing {
   description     String   // short description
   cuisine         String?
   phone           String?
+  whatsappNumber  String?
   website         String?
   email           String?
   bookingLink     String?

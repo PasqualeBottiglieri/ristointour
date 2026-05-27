@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
+const BASE_URL = "https://www.ristointour.it";
+
 export const revalidate = 60;
 
 interface PageProps {
@@ -22,13 +24,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${sponsor.name} — Partner`,
     description: sponsor.shortDescription,
     openGraph: {
+      type: "website",
+      url: `${BASE_URL}/partner/${sponsor.slug}`,
       title: `${sponsor.name} — ristointour.it`,
       description: sponsor.shortDescription ?? undefined,
       images: sponsor.logo
-        ? [{ url: sponsor.logo, width: 512, height: 512, alt: sponsor.name }]
-        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+        ? [{ url: sponsor.logo, width: 1200, height: 630, alt: sponsor.name, type: sponsor.logo.endsWith(".png") ? "image/png" : "image/jpeg" }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it", type: "image/jpeg" }],
     },
     twitter: {
+      card: "summary_large_image",
       title: `${sponsor.name} — ristointour.it`,
       description: sponsor.shortDescription ?? undefined,
       images: sponsor.logo

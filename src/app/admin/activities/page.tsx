@@ -93,15 +93,13 @@ export default async function ActivitiesPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-3">
-                    {listing.hasDetailPage && (
-                      <Link
-                        href={`/ristoranti/${listing.slug}`}
+                    <Link
+                        href={`/ristoranti/${listing.slug}${listing.status !== "published" ? "?preview=true" : ""}`}
                         className="text-blue-600 hover:text-blue-800 font-medium text-xs"
                         target="_blank"
                       >
-                        Vedi
+                        {listing.status !== "published" ? "Anteprima" : "Vedi"}
                       </Link>
-                    )}
                     <Link
                       href={`/admin/activities/${listing.id}/edit`}
                       className="text-emerald-700 hover:text-emerald-900 font-medium text-xs"

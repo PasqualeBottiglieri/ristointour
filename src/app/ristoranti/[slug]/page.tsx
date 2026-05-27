@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getListingBySlug } from "@/lib/queries";
+import { getListingBySlug, getListingBySlugPreview } from "@/lib/queries";
+import { getSession } from "@/lib/auth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RestaurantHero from "@/components/RestaurantHero";
@@ -15,15 +16,24 @@ import RestaurantSimilar from "@/components/RestaurantSimilar";
 import MobileBookingButton from "@/components/MobileBookingButton";
 import Breadcrumb from "@/components/Breadcrumb";
 
+const BASE_URL = "https://www.ristointour.it";
+
 export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ preview?: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const restaurant = await getListingBySlug(slug);
+  const { preview } = await searchParams;
+  const isPreview = preview === "true";
+  let restaurant = await getListingBySlug(slug);
+  if (!restaurant && isPreview) {
+    const session = await getSession();
+    if (session) restaurant = await getListingBySlugPreview(slug);
+  }
   if (!restaurant) return { title: "Ristorante non trovato" };
 
   const title = restaurant.cuisine
@@ -38,13 +48,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: `/ristoranti/${restaurant.slug}`,
     },
     openGraph: {
+      type: "website",
+      url: `${BASE_URL}/ristoranti/${restaurant.slug}`,
       title: `${restaurant.name} — ristointour.it`,
       description,
       images: restaurant.image
-        ? [{ url: restaurant.image, width: 1200, height: 630, alt: restaurant.name }]
-        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+        ? [{ url: restaurant.image, width: 1200, height: 630, alt: restaurant.name, type: restaurant.image.endsWith(".png") ? "image/png" : "image/jpeg" }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it", type: "image/jpeg" }],
     },
     twitter: {
+      card: "summary_large_image",
       title: `${restaurant.name} — ristointour.it`,
       description,
       images: restaurant.image
@@ -118,9 +131,15 @@ function buildRestaurantJsonLd(restaurant: {
   return jsonLd;
 }
 
-export default async function RestaurantPage({ params }: PageProps) {
+export default async function RestaurantPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
-  const restaurant = await getListingBySlug(slug);
+  const { preview } = await searchParams;
+  const isPreview = preview === "true";
+  let restaurant = await getListingBySlug(slug);
+  if (!restaurant && isPreview) {
+    const session = await getSession();
+    if (session) restaurant = await getListingBySlugPreview(slug);
+  }
 
   if (!restaurant) notFound();
 

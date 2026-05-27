@@ -15,6 +15,7 @@ export default function BusinessCardBasic({
           alt={business.name}
           fill
           sizes="64px"
+          unoptimized
           className="object-cover"
         />
       </div>

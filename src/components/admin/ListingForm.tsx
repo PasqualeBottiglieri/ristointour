@@ -8,6 +8,7 @@ import type {
 } from "@/lib/google-places";
 import ImageUpload from "./ImageUpload";
 import GooglePlacesSearch from "./GooglePlacesSearch";
+import SocialLinksInput from "./SocialLinksInput";
 import ListingMediaManager, {
   type ListingMediaManagerHandle,
 } from "./ListingMediaManager";
@@ -439,6 +440,17 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
             </div>
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
+                WhatsApp
+              </label>
+              <input
+                name="whatsappNumber"
+                defaultValue={listing?.whatsappNumber || ""}
+                className={inputClass}
+                placeholder="+39 338 1234567"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
                 Sito Web
               </label>
               <input
@@ -470,6 +482,10 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
               className={inputClass}
             />
           </div>
+
+          <SocialLinksInput
+            defaultValue={listing?.socialLinks as { platform: string; url: string }[] | undefined}
+          />
         </fieldset>
 
         {/* ── Media ─────────────────────────────────────────────── */}

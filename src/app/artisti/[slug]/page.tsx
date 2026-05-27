@@ -11,6 +11,8 @@ import ArtistVideoCarousel from "@/components/ArtistVideoCarousel";
 import ArtistSocials from "@/components/ArtistSocials";
 import Breadcrumb from "@/components/Breadcrumb";
 
+const BASE_URL = "https://www.ristointour.it";
+
 export const revalidate = 60;
 
 interface PageProps {
@@ -26,13 +28,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${artist.name} - ${parseGenres(artist.genre).join(", ")}`,
     description: artist.shortDescription,
     openGraph: {
+      type: "website",
+      url: `${BASE_URL}/artisti/${artist.slug}`,
       title: `${artist.name} — ristointour.it`,
       description: artist.shortDescription ?? undefined,
       images: artist.image
-        ? [{ url: artist.image, width: 1200, height: 630, alt: artist.name }]
-        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it" }],
+        ? [{ url: artist.image, width: 1200, height: 630, alt: artist.name, type: artist.image.endsWith(".png") ? "image/png" : "image/jpeg" }]
+        : [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ristointour.it", type: "image/jpeg" }],
     },
     twitter: {
+      card: "summary_large_image",
       title: `${artist.name} — ristointour.it`,
       description: artist.shortDescription ?? undefined,
       images: artist.image
