@@ -80,6 +80,7 @@ export async function createListing(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/admin/activities");
   revalidatePath(`/ristoranti/${slug}`);
+  revalidatePath(`/camping/${slug}`);
   redirect("/admin/activities");
 }
 

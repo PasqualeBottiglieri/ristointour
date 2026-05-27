@@ -94,7 +94,7 @@ export default async function ActivitiesPage() {
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-3">
                     <Link
-                        href={`/ristoranti/${listing.slug}${listing.status !== "published" ? "?preview=true" : ""}`}
+                        href={`/${listing.category === "camping" ? "camping" : "ristoranti"}/${listing.slug}${listing.status !== "published" ? "?preview=true" : ""}`}
                         className="text-blue-600 hover:text-blue-800 font-medium text-xs"
                         target="_blank"
                       >

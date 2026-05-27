@@ -9,6 +9,7 @@ export const navLinks = [
   { label: "Ristoranti", href: "/ristoranti" },
   { label: "Agriturismi", href: "/agriturismi" },
   { label: "Caseifici", href: "/caseifici" },
+  { label: "Camping", href: "/camping" },
   { label: "Esperienze", href: "/esperienze" },
   { label: "Territori", href: "/territori" },
   { label: "Artisti", href: "/artisti" },
@@ -25,6 +26,7 @@ export const categories = [
   { icon: "flatware", label: "Caseifici", href: "/caseifici" },
   { icon: "wine_bar", label: "Cantine", href: "/cantine" },
   { icon: "bakery_dining", label: "Pasticcerie", href: "/pasticcerie" },
+  { icon: "holiday_village", label: "Camping", href: "/camping" },
 ];
 
 export const experiences = [
@@ -103,6 +105,7 @@ export const footerCategories = [
   { label: "Ristoranti & Pizzerie", href: "/ristoranti" },
   { label: "Caseifici Artigianali", href: "/caseifici" },
   { label: "Agriturismi", href: "/agriturismi" },
+  { label: "Camping e Villaggi", href: "/camping" },
   { label: "Esperienze Gastronomiche", href: "/esperienze" },
   { label: "Artisti & Musica", href: "/artisti" },
 ];
@@ -121,6 +124,7 @@ export const searchCategories = [
   { label: "Caseifici", href: "/caseifici" },
   { label: "Cantine", href: "/cantine" },
   { label: "Pasticcerie", href: "/pasticcerie" },
+  { label: "Camping e Villaggi", href: "/camping" },
   { label: "Artisti", href: "/artisti" },
 ];
 

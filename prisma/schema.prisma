@@ -11,7 +11,7 @@ model Listing {
   id              String   @id @default(cuid())
   slug            String   @unique
   name            String
-  category        String   // ristorante, pizzeria, agriturismo, caseificio, cantina, pasticceria, altro
+  category        String   // ristorante, pizzeria, agriturismo, caseificio, cantina, pasticceria, camping, altro
   planType        String   @default("basic") // basic, premium, sponsor
   location        String
   address         String?  // indirizzo completo (via, civico, CAP, città)

@@ -295,6 +295,7 @@ export default function ListingForm({ listing, action }: ListingFormProps) {
                 <option value="caseificio">Caseificio</option>
                 <option value="cantina">Cantina</option>
                 <option value="pasticceria">Pasticceria</option>
+                <option value="camping">Camping / Villaggio</option>
                 <option value="altro">Altro</option>
               </select>
             </div>
